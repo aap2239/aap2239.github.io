@@ -1,84 +1,102 @@
 ---
 /**
- * Abstract route through the journey stops. Desktop only (hidden under 768px;
- * the mobile layout uses a CSS timeline instead). Route geometry is a
- * Catmull-Rom spline converted to cubic Béziers so any number of stops works.
+ * World map with the journey route. Built at build time from Natural Earth data.
+ * The default viewBox is the whole world, so without JavaScript (or under reduced
+ * motion) the full route and every stop are visible. On desktop, journey.ts flies
+ * the camera by animating the viewBox as the page scrolls.
  */
-import { journey } from '@/data/journey';
+import { journey, camera } from '@/data/journey';
+import {
+  MAP_W,
+  MAP_H,
+  project,
+  worldLandPath,
+  detailLandPath,
+  graticulePath,
+  arcPath,
+} from '@/lib/worldmap';
 
-const W = 1200;
-const H = 520;
+const ASPECT = 2.1;
+const world = worldLandPath();
+// Extra coastline detail where the camera zooms in: India, and the US Northeast.
+const detail = detailLandPath([
+  [[52, -2], [100, 36]],
+  [[-100, 24], [-56, 56]],
+]);
+const graticule = graticulePath(30);
 
-type P = { x: number; y: number };
-function spline(pts: P[], tension = 0.5): string {
-  if (pts.length < 2) return '';
-  const d = [`M${pts[0].x},${pts[0].y}`];
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[i - 1] ?? pts[i];
-    const p1 = pts[i];
-    const p2 = pts[i + 1];
-    const p3 = pts[i + 2] ?? p2;
-    const c1x = p1.x + ((p2.x - p0.x) / 6) * tension * 2;
-    const c1y = p1.y + ((p2.y - p0.y) / 6) * tension * 2;
-    const c2x = p2.x - ((p3.x - p1.x) / 6) * tension * 2;
-    const c2y = p2.y - ((p3.y - p1.y) / 6) * tension * 2;
-    d.push(`C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2.x},${p2.y}`);
+const stops = journey.map((s) => ({ ...s, ...project(s.lon, s.lat) }));
+const segments = stops.slice(1).map((b, i) => arcPath(stops[i], b));
+
+// Camera keyframes in map units. Height follows the SVG aspect so nothing letterboxes.
+const cam = camera.map((k, i) => {
+  const c = project(k.lon ?? stops[Math.min(Math.round(k.t), stops.length - 1)].lon, k.lat ?? stops[Math.min(Math.round(k.t), stops.length - 1)].lat);
+  const w = (k.w / 360) * MAP_W;
+  return { t: k.t, x: +c.x.toFixed(1), y: +c.y.toFixed(1), w: +w.toFixed(1), i };
+});
+
+// Label placement relative to the marker (in map units at world zoom; counter-scaled by JS).
+function labelPos(side: string) {
+  switch (side) {
+    case 'above': return { x: 0, y: -26, anchor: 'middle', yearsY: -46 };
+    case 'left': return { x: -22, y: 8, anchor: 'end', yearsY: 26 };
+    case 'right': return { x: 22, y: 8, anchor: 'start', yearsY: 26 };
+    default: return { x: 0, y: 40, anchor: 'middle', yearsY: 60 };
   }
-  return d.join(' ');
 }
-
-const path = spline(journey);
-const gridX = Array.from({ length: 11 }, (_, i) => (i * W) / 10);
-const gridY = Array.from({ length: 5 }, (_, i) => (i * H) / 4);
+const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT}`;
 ---
 
 <svg
   class="map"
-  viewBox={`0 0 ${W} ${H}`}
-  width={W}
-  height={H}
+  viewBox={defaultView}
+  preserveAspectRatio="xMidYMid slice"
   role="img"
   aria-labelledby="map-title"
   data-map
+  data-camera={JSON.stringify(cam)}
+  data-aspect={ASPECT}
+  data-world-w={MAP_W}
 >
-  <title id="map-title">Route from Mumbai to Bangalore to New York, with Stamford as the current office</title>
+  <title id="map-title">World map showing the route from Mumbai to Bangalore to New York, with Stamford as the current office</title>
 
-  <g class="map__grid" aria-hidden="true">
-    {gridX.map((x) => <line x1={x} y1="0" x2={x} y2={H} />)}
-    {gridY.map((y) => <line x1="0" y1={y} x2={W} y2={y} />)}
-  </g>
-
-  <path class="map__ghost" d={path} aria-hidden="true" />
-  <path class="map__route" d={path} data-route aria-hidden="true" />
+  <rect x="0" y="0" width={MAP_W} height={MAP_H} class="map__ocean" />
+  <path class="map__graticule" d={graticule} aria-hidden="true" />
+  <path class="map__land" d={world} aria-hidden="true" />
+  <path class="map__land" d={detail} aria-hidden="true" />
 
   <g aria-hidden="true">
-    {journey.map((s, i) => (
-      <g class="map__stop" data-stop={i}>
-        <circle class="map__ring" cx={s.x} cy={s.y} r="14" data-marker />
-        <circle class="map__dot" cx={s.x} cy={s.y} r="5" data-marker />
-        <text
-          class="map__label"
-          x={s.x}
-          y={s.y + (s.y > H / 2 ? 44 : -34)}
-          text-anchor="middle"
-        >
-          {s.city}
-        </text>
-        <text
-          class="map__years"
-          x={s.x}
-          y={s.y + (s.y > H / 2 ? 66 : -64)}
-          text-anchor="middle"
-        >
-          {s.years}
-        </text>
-      </g>
+    {segments.map((d, i) => (
+      <>
+        <path class="map__ghost" d={d} />
+        <path class="map__route" d={d} data-seg={i} />
+      </>
     ))}
   </g>
 
+  <g aria-hidden="true">
+    {stops.map((s, i) => {
+      const lp = labelPos(s.label);
+      return (
+        <g class="map__stop" data-stop={i} data-x={s.x.toFixed(1)} data-y={s.y.toFixed(1)} transform={`translate(${s.x.toFixed(1)} ${s.y.toFixed(1)})`}>
+          <g data-pop>
+            <circle class="map__ring" r="14" />
+            <circle class="map__dot" r="5" />
+          </g>
+          <g data-label>
+            <text class="map__label" x={lp.x} y={lp.y} text-anchor={lp.anchor}>{s.city}</text>
+            <text class="map__years" x={lp.x} y={lp.yearsY} text-anchor={lp.anchor}>{s.years}</text>
+          </g>
+        </g>
+      );
+    })}
+  </g>
+
   <g class="map__traveller" data-traveller aria-hidden="true">
-    <circle r="16" class="map__halo" />
-    <circle r="6" class="map__ship" />
+    <g data-traveller-inner>
+      <circle r="16" class="map__halo" />
+      <circle r="6" class="map__ship" />
+    </g>
   </g>
 </svg>
 
@@ -86,28 +104,40 @@ const gridY = Array.from({ length: 5 }, (_, i) => (i * H) / 4);
   .map {
     width: 100%;
     height: auto;
-    overflow: visible;
+    aspect-ratio: 2.1 / 1;
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--line);
   }
-  .map__grid line {
+  .map__ocean {
+    fill: var(--bg);
+  }
+  .map__graticule {
+    fill: none;
     stroke: var(--line);
     stroke-width: 1;
     vector-effect: non-scaling-stroke;
   }
+  .map__land {
+    fill: #262626;
+    stroke: none;
+  }
+  /* Route strokes are in map units and rescaled by JS as the camera zooms
+     (non-scaling-stroke would break dash-based drawing under a moving viewBox). */
   .map__ghost {
     fill: none;
-    stroke: var(--line-strong);
-    stroke-width: 1.5;
-    stroke-dasharray: 2 8;
+    stroke: var(--fg-faint);
+    stroke-width: 3;
+    stroke-dasharray: 4 12;
     stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
+    opacity: 0.7;
   }
   .map__route {
     fill: none;
     stroke: var(--accent);
-    stroke-width: 2.5;
+    stroke-width: 4.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
   }
   .map__ring {
     fill: var(--accent-soft);
@@ -118,42 +148,49 @@ const gridY = Array.from({ length: 5 }, (_, i) => (i * H) / 4);
   .map__dot {
     fill: var(--accent);
   }
-  [data-marker] {
-    transform-box: fill-box;
-    transform-origin: center;
-  }
   .map__label {
     fill: var(--fg);
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: -0.02em;
     text-transform: uppercase;
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 6px;
+    stroke-linejoin: round;
   }
   .map__years {
     fill: var(--fg-muted);
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 0.08em;
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 5px;
+    stroke-linejoin: round;
   }
   .map__traveller {
     will-change: transform;
   }
   .map__halo {
     fill: var(--accent);
-    opacity: 0.18;
+    opacity: 0.2;
   }
   .map__ship {
     fill: var(--fg);
     stroke: var(--accent);
     stroke-width: 3;
   }
-  /* Without JS (or with reduced motion) the route is fully drawn and the traveller sits at the end. */
+  /* Static view (no JS, reduced motion, or mobile): no traveller, labels only for the endpoints. */
   html:not(.js) .map__traveller,
-  html:not(.js) [data-marker] {
-    visibility: visible;
+  html:not(.js) [data-stop='1'] [data-label],
+  html:not(.js) [data-stop='3'] [data-label] {
+    display: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    .map__traveller {
+    .map__traveller,
+    [data-stop='1'] [data-label],
+    [data-stop='3'] [data-label] {
       display: none;
     }
   }

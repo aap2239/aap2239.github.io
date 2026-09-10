@@ -80,9 +80,10 @@ export interface JourneyStop {
   years: string;
   title: string;
   blurb: string;
-  /** Position in the desktop SVG (viewBox 1200 x 520). */
-  x: number;
-  y: number;
+  lat: number;
+  lon: number;
+  /** Where the city label sits relative to its marker. */
+  label: 'above' | 'below' | 'left' | 'right';
   todo?: boolean;
 }
 

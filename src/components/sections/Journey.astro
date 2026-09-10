@@ -56,7 +56,7 @@ import { journey } from '@/data/journey';
   .journey__map :global(.map) {
     width: auto;
     max-width: 100%;
-    max-height: 46vh;
+    max-height: 48vh;
   }
   .journey__captions {
     position: relative;
@@ -103,7 +103,11 @@ import { journey } from '@/data/journey';
       margin-bottom: var(--space-4);
     }
     .journey__map {
-      display: none;
+      margin-bottom: var(--space-6);
+    }
+    .journey__map :global(.map) {
+      width: 100%;
+      max-height: none;
     }
     .journey__captions {
       display: grid;
