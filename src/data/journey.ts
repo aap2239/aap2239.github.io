@@ -41,7 +41,7 @@ export const journey: JourneyStop[] = [
     years: '2024 – now',
     title: 'Gartner',
     blurb:
-      'Data science at Gartner. TODO: one line on what you work on and why it matters.',
+      'Data science at Gartner, with the office in Stamford and home still in New York. TODO: one line on what you work on and why it matters.',
     x: 1070,
     y: 100,
     todo: true,

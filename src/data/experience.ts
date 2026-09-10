@@ -8,7 +8,7 @@ export const experience: Experience[] = [
   {
     company: 'Gartner',
     role: 'Data Scientist', // TODO: confirm exact title
-    location: 'Stamford, CT',
+    location: 'Stamford, CT · based in New York',
     start: 'Jan 2024',
     end: 'Present',
     year: '2024',

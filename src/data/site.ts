@@ -4,17 +4,17 @@ export const site = {
   name: 'Aishwarya Patange',
   firstName: 'Aishwarya',
   role: 'Data Scientist / ML Engineer',
-  location: 'Stamford, CT',
+  location: 'New York, NY',
   email: 'aap2239@columbia.edu',
   url: 'https://aap2239.github.io',
   title: 'Aishwarya Patange — Data Scientist / ML Engineer',
   description:
-    'Data scientist and ML engineer in Stamford, CT. Built an AutoML platform from scratch, computer vision on a live smart-city testbed at Columbia, and LLM systems for cybersecurity. Currently at Gartner.',
+    'Data scientist and ML engineer in New York. Built an AutoML platform from scratch, computer vision on a live smart-city testbed at Columbia, and LLM systems for cybersecurity. Currently at Gartner.',
   /** Drop your real PDF at public/resume.pdf to replace the placeholder. */
   resumePath: '/resume.pdf',
   ogImage: '/og.jpg',
   hero: {
-    eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · Stamford, CT',
+    eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
     lines: ['I build ML systems', 'that actually', 'ship.'],
     /** Which line gets the italic accent treatment (0-based). */
     accentLine: 2,
@@ -23,7 +23,7 @@ export const site = {
   about: {
     lead: 'I started in Mumbai as an electronics engineer who spent more time training models than soldering boards.',
     paragraphs: [
-      'That turned into building torsha.ai, an end-to-end AutoML platform, at iQGateway in Bangalore. Then a master’s at Columbia, where I trained detection and tracking models on real intersection footage for the COSMOS smart-city testbed and taught deep learning as a TA. Today I do data science at Gartner in Stamford, Connecticut.',
+      'That turned into building torsha.ai, an end-to-end AutoML platform, at iQGateway in Bangalore. Then a master’s at Columbia, where I trained detection and tracking models on real intersection footage for the COSMOS smart-city testbed and taught deep learning as a TA. Today I do data science at Gartner, working out of the Stamford office and still living in New York.',
       'What I care about: models that hold up outside the notebook. Clean data pipelines, honest evaluation, explainability, and the engineering that gets a model in front of people.',
     ],
     stats: [

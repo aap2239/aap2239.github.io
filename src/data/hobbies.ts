@@ -10,7 +10,7 @@ export const ticker = [
   'Desi hip hop',
   'Movies',
   'Hyperion',
-  'Mumbai → Stamford',
+  'Mumbai → New York',
 ];
 
 export const hobbies: Hobby[] = [
