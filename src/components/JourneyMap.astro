@@ -5,7 +5,7 @@
  * motion) the full route and every stop are visible. On desktop, journey.ts flies
  * the camera by animating the viewBox as the page scrolls.
  */
-import { journey, camera } from '@/data/journey';
+import { journey, camera, pacing } from '@/data/journey';
 import {
   MAP_W,
   MAP_H,
@@ -28,12 +28,37 @@ const graticule = graticulePath(30);
 const stops = journey.map((s) => ({ ...s, ...project(s.lon, s.lat) }));
 const segments = stops.slice(1).map((b, i) => arcPath(stops[i], b));
 
-// Camera keyframes in map units. Height follows the SVG aspect so nothing letterboxes.
-const cam = camera.map((k, i) => {
-  const c = project(k.lon ?? stops[Math.min(Math.round(k.t), stops.length - 1)].lon, k.lat ?? stops[Math.min(Math.round(k.t), stops.length - 1)].lat);
-  const w = (k.w / 360) * MAP_W;
-  return { t: k.t, x: +c.x.toFixed(1), y: +c.y.toFixed(1), w: +w.toFixed(1), i };
+// Schedule: when the dot arrives at and departs from each stop.
+const arrive: number[] = [0];
+const depart: number[] = [];
+stops.forEach((_, i) => {
+  depart[i] = arrive[i] + pacing.hold;
+  if (i < pacing.legs.length) arrive[i + 1] = depart[i] + pacing.legs[i];
 });
+const last = stops.length - 1;
+const worldEnd = depart[last] + pacing.world;
+const total = worldEnd + pacing.tail;
+
+// Camera keyframes in map units, with a matching key at departure so the camera rests during holds.
+const cam: Array<{ t: number; x: number; y: number; w: number }> = [];
+for (const k of camera) {
+  const w = +((k.w / 360) * MAP_W).toFixed(1);
+  if (k.at === 'world') {
+    const c = project(0, 0);
+    cam.push({ t: worldEnd, x: c.x, y: c.y, w });
+  } else if (k.at === 'mid') {
+    const c = project(k.lon, k.lat);
+    cam.push({ t: depart[k.i] + pacing.legs[k.i] / 2, x: +c.x.toFixed(1), y: +c.y.toFixed(1), w });
+  } else {
+    const s = stops[k.i];
+    const c = project(k.lon ?? s.lon, k.lat ?? s.lat);
+    cam.push({ t: arrive[k.i], x: +c.x.toFixed(1), y: +c.y.toFixed(1), w });
+    cam.push({ t: depart[k.i], x: +c.x.toFixed(1), y: +c.y.toFixed(1), w });
+  }
+}
+cam.sort((a, b) => a.t - b.t);
+
+const schedule = { arrive, depart, legs: pacing.legs, worldEnd, total, scrollPerUnit: pacing.scrollPerUnit };
 
 // Label placement relative to the marker (in map units at world zoom; counter-scaled by JS).
 function labelPos(side: string) {
@@ -55,6 +80,7 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
   aria-labelledby="map-title"
   data-map
   data-camera={JSON.stringify(cam)}
+  data-schedule={JSON.stringify(schedule)}
   data-aspect={ASPECT}
   data-world-w={MAP_W}
 >

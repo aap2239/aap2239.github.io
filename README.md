@@ -37,7 +37,7 @@ All copy lives in `src/data/`. You should never need to touch a component to cha
 | `projects.ts` | Featured case studies (`featured: true`) and the open-source grid. Only repos with `showcase: true` are shown; the rest are kept in the file for easy swapping. |
 | `skills.ts` | The four pipeline stages. Add `usedIn` to a skill to give it the amber dot. |
 | `education.ts` | Degrees |
-| `journey.ts` | The four map stops (real latitude/longitude) and the camera keyframes for the scroll fly-through. The map itself is generated at build time from Natural Earth data in `src/lib/worldmap.ts`. |
+| `journey.ts` | The four map stops (real latitude/longitude), the `pacing` of the fly-through (hold at each city, time per leg, final pull-back), and the camera keyframes. The map itself is generated at build time from Natural Earth data in `src/lib/worldmap.ts`. |
 | `now.ts` | The "Now" list and its "Updated" stamp |
 | `hobbies.ts` | Ticker words and the hobby tiles |
 

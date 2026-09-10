@@ -12,6 +12,15 @@ interface CamKey {
   w: number;
 }
 
+interface Schedule {
+  arrive: number[];
+  depart: number[];
+  legs: number[];
+  worldEnd: number;
+  total: number;
+  scrollPerUnit: number;
+}
+
 /** Stroke widths and dash lengths in screen pixels; converted to map units per frame. */
 const ROUTE_PX = 2.5;
 const GHOST_PX = 1.5;
@@ -106,7 +115,8 @@ export function initJourney({ desktop }: Opts): () => void {
   // ---------- Desktop: pinned fly-through ----------
   const stage = section.querySelector<HTMLElement>('[data-journey-stage]');
   const keys: CamKey[] = JSON.parse(svg.dataset.camera ?? '[]');
-  if (!stage || !traveller || segs.length === 0 || caps.length === 0 || keys.length < 2) return () => {};
+  const sched: Schedule | null = svg.dataset.schedule ? JSON.parse(svg.dataset.schedule) : null;
+  if (!stage || !traveller || !sched || segs.length === 0 || caps.length === 0 || keys.length < 2) return () => {};
 
   const cam = { x: keys[0].x, y: keys[0].y, w: keys[0].w };
   const pops = stops.map((s) => s.querySelector<SVGGElement>('[data-pop]'));
@@ -128,16 +138,15 @@ export function initJourney({ desktop }: Opts): () => void {
   gsap.set(caps[0], { opacity: 1, y: 0 });
   applyCamera();
 
-  const end = keys[keys.length - 1].t;
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     onUpdate: applyCamera,
     scrollTrigger: {
       trigger: stage,
       start: 'top top',
-      end: '+=380%',
+      end: `+=${Math.round(sched.total * sched.scrollPerUnit)}%`,
       pin: true,
-      scrub: 1,
+      scrub: 1.2,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onRefresh: () => {
@@ -147,40 +156,49 @@ export function initJourney({ desktop }: Opts): () => void {
     },
   });
 
-  // Camera legs.
+  // Camera legs (a key at arrival and one at departure keeps the camera still during each hold).
   for (let i = 1; i < keys.length; i++) {
     const k = keys[i];
     const prev = keys[i - 1];
-    tl.to(cam, { x: k.x, y: k.y, w: k.w, duration: k.t - prev.t, ease: 'power1.inOut' }, prev.t);
+    const d = k.t - prev.t;
+    if (d <= 0) continue;
+    tl.to(cam, { x: k.x, y: k.y, w: k.w, duration: d, ease: 'power1.inOut' }, prev.t);
   }
 
-  // Route legs and traveller: one time unit per leg.
+  // Route legs and traveller: ease out of a city and into the next one.
   segs.forEach((seg, i) => {
-    tl.to(seg, { strokeDashoffset: 0, duration: 1 }, i);
-    tl.to(traveller, { duration: 1, motionPath: { path: seg, align: seg, alignOrigin: [0.5, 0.5] } }, i);
+    const start = sched.depart[i];
+    const d = sched.legs[i];
+    tl.to(seg, { strokeDashoffset: 0, duration: d, ease: 'power1.inOut' }, start);
+    tl.to(
+      traveller,
+      { duration: d, ease: 'power1.inOut', motionPath: { path: seg, align: seg, alignOrigin: [0.5, 0.5] } },
+      start,
+    );
   });
 
-  // Markers and labels pop as the traveller arrives.
+  // Markers and labels pop as the traveller arrives (the first one right at the start).
   stops.forEach((_, i) => {
-    const at = Math.min(i, segs.length - 0.3);
+    const at = Math.max(0, sched.arrive[i] - 0.15);
     if (pops[i]) tl.to(pops[i], { scale: 1, duration: 0.3, ease: 'back.out(2)' }, at);
     if (labels[i]) tl.to(labels[i], { opacity: 1, duration: 0.3 }, at + 0.05);
   });
 
-  // Captions crossfade at each stop.
+  // Captions crossfade as the traveller arrives at each stop.
   caps.forEach((cap, i) => {
     if (i === 0) return;
-    tl.to(caps[i - 1], { opacity: 0, y: -12, duration: 0.25, ease: 'power2.in' }, i - 0.35)
-      .to(cap, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, i - 0.1);
+    const at = sched.arrive[i];
+    tl.to(caps[i - 1], { opacity: 0, y: -12, duration: 0.25, ease: 'power2.in' }, at - 0.3)
+      .to(cap, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, at - 0.05);
   });
 
   // Pull back to the world: hide the traveller and the labels that would collide at that zoom.
-  const worldAt = end - 1;
-  tl.to(traveller, { opacity: 0, duration: 0.3 }, worldAt + 0.2);
-  [1, 3].forEach((i) => labels[i] && tl.to(labels[i], { opacity: 0, duration: 0.3 }, worldAt + 0.2));
+  const worldStart = sched.depart[sched.depart.length - 1];
+  tl.to(traveller, { opacity: 0, duration: 0.3 }, worldStart + 0.2);
+  [1, 3].forEach((i) => labels[i] && tl.to(labels[i], { opacity: 0, duration: 0.3 }, worldStart + 0.2));
 
-  // Hold at the end so the world view gets a beat before the section unpins.
-  tl.to({}, { duration: 0.5 }, end);
+  // Beat at the end so the world view settles before the section unpins.
+  tl.to({}, { duration: sched.total - sched.worldEnd }, sched.worldEnd);
 
   return () => {};
 }
