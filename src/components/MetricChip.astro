@@ -1,0 +1,53 @@
+---
+import type { Metric } from '@/data/types';
+
+interface Props {
+  metric: Metric;
+  size?: 'sm' | 'lg';
+}
+const { metric, size = 'sm' } = Astro.props;
+const decimals = metric.decimals ?? 0;
+const formatted = metric.value.toLocaleString('en-US', {
+  minimumFractionDigits: decimals,
+  maximumFractionDigits: decimals,
+});
+---
+
+<div class:list={['metric', `metric--${size}`]}>
+  <span class="metric__value">
+    {metric.prefix && <span class="metric__affix">{metric.prefix}</span>}
+    <span data-count={metric.value} data-decimals={decimals}>{formatted}</span>
+    {metric.suffix && <span class="metric__affix">{metric.suffix}</span>}
+  </span>
+  <span class="metric__label">{metric.label}</span>
+</div>
+
+<style>
+  .metric {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .metric__value {
+    font-family: var(--font-display);
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .metric--sm .metric__value {
+    font-size: var(--step-2);
+  }
+  .metric--lg .metric__value {
+    font-size: var(--step-4);
+  }
+  .metric__affix {
+    font-size: 0.6em;
+    vertical-align: 0.2em;
+  }
+  .metric__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--fg-muted);
+  }
+</style>

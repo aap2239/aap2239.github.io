@@ -1,0 +1,68 @@
+/* Design tokens. Single source of truth for color, type, spacing, motion. */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #0a0a0b;
+  --bg-2: #121214;
+  --bg-3: #1a1a1d;
+  --line: rgb(237 234 228 / 0.1);
+  --line-strong: rgb(237 234 228 / 0.18);
+
+  /* Text */
+  --fg: #edeae4;
+  --fg-muted: #a8a39b;
+  --fg-faint: #6b675f; /* decorative only, never body text */
+
+  /* Accent */
+  --accent: #f2a33a;
+  --accent-hover: #ffc466;
+  --accent-ink: #1a1000;
+  --accent-glow: rgb(242 163 58 / 0.16);
+  --accent-glow-2: rgb(120 70 30 / 0.14);
+  --accent-soft: rgb(242 163 58 / 0.12);
+
+  /* Type */
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.2vw, 2.4rem);
+  --step-3: clamp(2.2rem, 1.6rem + 2.5vw, 3.6rem);
+  --step-4: clamp(3rem, 1.8rem + 5vw, 6rem);
+  --step-5: clamp(3.4rem, 1.6rem + 8vw, 9rem);
+  --leading-tight: 0.98;
+  --leading-body: 1.6;
+  --tracking-display: -0.02em;
+  --tracking-mono: 0.08em;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-pad: clamp(4.5rem, 10vw, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --measure: 62ch;
+  --container: 1200px;
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur: 400ms;
+
+  /* Layers */
+  --z-grain: 50;
+  --z-nav: 100;
+  --z-skip: 200;
+}

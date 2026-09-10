@@ -1,0 +1,60 @@
+---
+import Chapter from '@/components/Chapter.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { featuredProjects, openSourceProjects } from '@/data/projects';
+---
+
+<Chapter id="work" number="04" eyebrow="Selected work" titleHtml="Things I’ve <em>built</em>, and what they did.">
+  <div class="featured" data-reveal-group>
+    {featuredProjects.map((p) => <ProjectCard project={p} />)}
+  </div>
+
+  <div class="oss">
+    <div class="oss__head" data-reveal>
+      <h3 class="oss__title">Open source & experiments</h3>
+      <a class="oss__all" href="https://github.com/aap2239" target="_blank" rel="noopener">
+        All repositories ↗<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+    </div>
+    <div class="grid" data-reveal-group>
+      {openSourceProjects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </div>
+</Chapter>
+
+<style>
+  .featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-5);
+  }
+  .oss {
+    margin-top: clamp(3rem, 7vw, 5rem);
+    display: grid;
+    gap: var(--space-5);
+  }
+  .oss__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .oss__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .oss__all {
+    font-size: var(--step--1);
+    color: var(--fg-muted);
+    text-decoration: none;
+  }
+  .oss__all:hover {
+    color: var(--accent);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-4);
+  }
+</style>

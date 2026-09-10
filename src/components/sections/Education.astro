@@ -1,0 +1,74 @@
+---
+import Chapter from '@/components/Chapter.astro';
+import { education } from '@/data/education';
+---
+
+<Chapter id="education" number="06" eyebrow="School" titleHtml="Two degrees, <em>one thread</em>.">
+  <div class="edu" data-reveal-group>
+    {education.map((e) => (
+      <article class="edu__card">
+        <p class="eyebrow">{e.start} – {e.end} · {e.location}</p>
+        <h3 class="edu__school">
+          <a href={e.href} target="_blank" rel="noopener">{e.school}<span class="visually-hidden"> (opens in new tab)</span></a>
+        </h3>
+        <p class="edu__degree">
+          {e.degree}
+          {e.track && <span class="muted"> · {e.track}</span>}
+        </p>
+        <ul class="edu__bullets">
+          {e.bullets.map((b) => <li>{b}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</Chapter>
+
+<style>
+  .edu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--space-5);
+  }
+  .edu__card {
+    display: grid;
+    gap: var(--space-3);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-2);
+  }
+  .edu__school {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .edu__school a {
+    text-decoration: none;
+  }
+  .edu__school a:hover {
+    color: var(--accent);
+  }
+  .edu__degree {
+    font-weight: 500;
+  }
+  .edu__bullets {
+    display: grid;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+    color: var(--fg-muted);
+    font-size: var(--step--1);
+  }
+  .edu__bullets li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+  .edu__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+</style>

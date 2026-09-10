@@ -1,0 +1,81 @@
+---
+import { site, socials } from '@/data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__mark" aria-hidden="true">A</span>
+      <span>{site.name}</span>
+    </div>
+    <ul class="footer__links" aria-label="Profiles">
+      {socials.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener me">
+            {s.label}<span class="visually-hidden"> (opens in new tab)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="footer__colophon">
+      © {year}. Built with Astro and GSAP, hosted on GitHub Pages.
+      <a href="#top" data-top>Back to top ↑</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-block: var(--space-7);
+    color: var(--fg-muted);
+    font-size: var(--step--1);
+  }
+  .footer__inner {
+    display: grid;
+    gap: var(--space-5);
+  }
+  .footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--fg);
+  }
+  .footer__mark {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
+    line-height: 1;
+    padding-top: 1px;
+  }
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+  .footer__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--fg-muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .footer__links a:hover {
+    color: var(--accent);
+  }
+  .footer__colophon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+  .footer__colophon a {
+    color: var(--fg);
+  }
+</style>

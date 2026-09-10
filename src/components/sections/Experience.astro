@@ -1,0 +1,202 @@
+---
+import Chapter from '@/components/Chapter.astro';
+import MetricChip from '@/components/MetricChip.astro';
+import { experience } from '@/data/experience';
+---
+
+<Chapter id="experience" number="03" eyebrow="Work" titleHtml="Where the work <em>happened</em>.">
+  <div class="xp" data-xp>
+    <div class="xp__side">
+      <div class="xp__sticky" aria-hidden="true">
+        {experience.map((e, i) => (
+          <div class="xp__meta" data-xp-meta={i}>
+            <span class="xp__year display">{e.year}</span>
+            <span class="xp__company">{e.company}</span>
+            <span class="xp__role muted">{e.role}</span>
+            <span class="xp__dates eyebrow">{e.start} – {e.end}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <ol class="xp__list">
+      <span class="xp__rule" aria-hidden="true"><span data-xp-fill></span></span>
+      {experience.map((e, i) => (
+        <li class:list={['xp__card', { 'is-todo': e.todo }]} data-xp-card={i} data-reveal>
+          <header class="xp__head">
+            <p class="eyebrow">
+              {e.start} – {e.end} · {e.location}
+            </p>
+            <h3 class="xp__title">
+              {e.role}{' '}
+              <span class="xp__at">
+                at{' '}
+                {e.href ? (
+                  <a href={e.href} target="_blank" rel="noopener">{e.company}<span class="visually-hidden"> (opens in new tab)</span></a>
+                ) : (
+                  e.company
+                )}
+              </span>
+            </h3>
+            {e.todo && (
+              <p class="xp__todo">
+                <b>TODO</b> Fill in this role in <code>src/data/experience.ts</code>. It is the newest and the one recruiters will read first.
+              </p>
+            )}
+            <p class="muted">{e.summary}</p>
+          </header>
+
+          <ul class="xp__bullets">
+            {e.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+
+          {e.metrics.length > 0 && (
+            <div class="xp__metrics">
+              {e.metrics.map((m) => <MetricChip metric={m} />)}
+            </div>
+          )}
+
+          <ul class="tags" aria-label="Technologies">
+            {e.tags.map((t) => <li class="tag">{t}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Chapter>
+
+<style>
+  .xp {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .xp__sticky {
+    position: sticky;
+    top: 22vh;
+    min-height: 16rem;
+  }
+  .xp__meta {
+    position: absolute;
+    inset: 0 auto auto 0;
+    display: grid;
+    gap: var(--space-1);
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.4s var(--ease-out),
+      transform 0.4s var(--ease-out);
+  }
+  .xp__meta[data-active],
+  :global(html:not(.js)) .xp__meta:first-child {
+    opacity: 1;
+    transform: none;
+  }
+  .xp__year {
+    font-size: var(--step-4);
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+  .xp__company {
+    font-size: var(--step-1);
+    font-weight: 500;
+  }
+  .xp__list {
+    position: relative;
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .xp__rule {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--line-strong);
+  }
+  .xp__rule > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform-origin: top;
+  }
+  .xp__card {
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-2);
+  }
+  .xp__card.is-todo {
+    border-style: dashed;
+    border-color: rgb(242 163 58 / 0.55);
+  }
+  .xp__head {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .xp__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .xp__at {
+    color: var(--fg-muted);
+  }
+  .xp__at a {
+    color: var(--fg);
+  }
+  .xp__todo {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    color: var(--fg);
+    font-size: var(--step--1);
+  }
+  .xp__todo b {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-right: 0.5em;
+  }
+  .xp__todo code {
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+  }
+  .xp__bullets {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .xp__bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--fg-muted);
+  }
+  .xp__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .xp__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5) var(--space-7);
+    padding-top: var(--space-2);
+  }
+  @media (max-width: 767px) {
+    .xp {
+      grid-template-columns: 1fr;
+    }
+    .xp__side {
+      display: none;
+    }
+  }
+</style>

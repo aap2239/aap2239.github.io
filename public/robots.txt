@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aap2239.github.io/sitemap-index.xml

@@ -1,0 +1,92 @@
+---
+import { site } from '@/data/site';
+const { contact } = site;
+---
+
+<section id="contact" class="chapter contact" aria-labelledby="contact-title">
+  <div class="glow contact__glow" aria-hidden="true"></div>
+  <div class="container contact__inner">
+    <p class="eyebrow" data-reveal><b>09</b> — Contact</p>
+
+    <h2 id="contact-title" class="contact__title display" data-reveal="lines">
+      {contact.headline.map((line, i) => (
+        <span class="mask-line"><span class:list={{ 'contact__accent': i === contact.headline.length - 1 }}>{line}</span></span>
+      ))}
+    </h2>
+
+    <p class="contact__sub muted measure" data-reveal>{contact.sub}</p>
+
+    <a class="contact__email display" href={`mailto:${site.email}`} data-reveal>{site.email}</a>
+
+    <div class="contact__actions" data-reveal-group>
+      <a class="btn btn--primary" href={`mailto:${site.email}`}>Say hello</a>
+      <a class="btn" href={site.resumePath} target="_blank" rel="noopener">
+        Resume<span class="visually-hidden"> (PDF, opens in new tab)</span>
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/aishwaryapatange/" target="_blank" rel="noopener">
+        LinkedIn<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+      <a class="btn" href="https://github.com/aap2239" target="_blank" rel="noopener">
+        GitHub<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+  }
+  .contact__glow {
+    z-index: -1;
+    bottom: -35vmax;
+    right: -20vmax;
+  }
+  .contact__inner {
+    display: grid;
+    gap: var(--space-5);
+  }
+  .contact__title {
+    font-size: var(--step-4);
+    display: grid;
+  }
+  .mask-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .mask-line > span {
+    display: block;
+  }
+  .contact__accent {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .contact__email {
+    justify-self: start;
+    font-size: var(--step-2);
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .contact__email:hover {
+    color: var(--accent);
+  }
+  .contact__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+  @media (max-width: 480px) {
+    .contact__actions .btn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+</style>

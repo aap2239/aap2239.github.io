@@ -1,0 +1,113 @@
+---
+import { nav, site } from '@/data/site';
+---
+
+<header class="nav" data-nav>
+  <div class="nav__inner container">
+    <a class="nav__brand" href="#top">
+      <span class="nav__mark" aria-hidden="true">A</span>
+      <span class="nav__name">{site.firstName}</span>
+      <span class="visually-hidden">, back to top</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__list">
+        {nav.map((item) => (
+          <li class:list={{ 'nav__item--desktop': !item.mobile }}>
+            <a href={item.href} data-spy={item.href.slice(1)}>{item.label}</a>
+          </li>
+        ))}
+        <li>
+          <a class="nav__resume" href={site.resumePath} target="_blank" rel="noopener">
+            Resume<span class="visually-hidden"> (PDF, opens in new tab)</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: var(--z-nav);
+    height: 56px;
+    transition:
+      transform var(--dur) var(--ease-out),
+      background-color var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+    border-bottom: 1px solid transparent;
+    will-change: transform;
+  }
+  .nav.is-scrolled {
+    background: rgb(10 10 11 / 0.72);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-color: var(--line);
+  }
+  .nav.is-hidden {
+    transform: translateY(-100%);
+  }
+  .nav__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    min-height: 44px;
+  }
+  .nav__mark {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1;
+    padding-top: 1px;
+  }
+  .nav__name {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 1.5vw, 1rem);
+  }
+  .nav__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 0.5rem;
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--fg-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .nav__list a[aria-current='true'],
+  .nav__list a:hover {
+    color: var(--fg);
+  }
+  .nav__resume {
+    color: var(--accent) !important;
+  }
+  @media (max-width: 767px) {
+    .nav__item--desktop {
+      display: none;
+    }
+    .nav__name {
+      display: none;
+    }
+  }
+</style>

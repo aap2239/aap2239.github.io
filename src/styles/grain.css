@@ -1,0 +1,38 @@
+/* Film grain overlay. Static by default; a stepped drift on desktop when motion is allowed. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.045;
+  contain: strict;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .grain {
+    inset: -50%;
+    animation: grain 0.8s steps(8) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate3d(0, 0, 0); }
+    25% { transform: translate3d(-3%, 2%, 0); }
+    50% { transform: translate3d(2%, -4%, 0); }
+    75% { transform: translate3d(-4%, -1%, 0); }
+    100% { transform: translate3d(3%, 3%, 0); }
+  }
+}
+
+/* Soft accent glows. Painted once, composited after. */
+.glow {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
+}
+.glow--2 {
+  background: radial-gradient(closest-side, var(--accent-glow-2), transparent 70%);
+}

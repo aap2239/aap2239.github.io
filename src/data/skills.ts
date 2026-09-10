@@ -1,0 +1,70 @@
+import type { SkillStage } from './types';
+
+/** Four stages of the pipeline, left to right. No proficiency bars on purpose. */
+export const skillStages: SkillStage[] = [
+  {
+    name: 'Data & Infra',
+    blurb: 'Getting data in, at scale, reliably.',
+    skills: [
+      { name: 'Apache Spark', usedIn: 'Credit default prediction' },
+      { name: 'Apache Beam', usedIn: 'Real-time stock prediction' },
+      { name: 'Dataflow', usedIn: 'Real-time stock prediction' },
+      { name: 'BigQuery', usedIn: 'Real-time stock prediction' },
+      { name: 'Pub/Sub' },
+      { name: 'PostgreSQL', usedIn: 'ChaosTrack' },
+      { name: 'MongoDB' },
+      { name: 'ArangoDB', usedIn: 'ChaosTrack' },
+      { name: 'Docker', usedIn: 'ChaosTrack' },
+      { name: 'Google Cloud' },
+      { name: 'Linux' },
+      { name: 'Git' },
+    ],
+  },
+  {
+    name: 'Modeling',
+    blurb: 'Training, evaluating, and explaining models.',
+    skills: [
+      { name: 'Python', usedIn: 'Everything' },
+      { name: 'PyTorch', usedIn: 'COSMOS Labs' },
+      { name: 'TensorFlow' },
+      { name: 'scikit-learn', usedIn: 'torsha.ai' },
+      { name: 'Hugging Face', usedIn: 'ChaosTrack' },
+      { name: 'YOLOv8', usedIn: 'COSMOS Labs' },
+      { name: 'OpenCV', usedIn: 'COSMOS Labs' },
+      { name: 'AutoML', usedIn: 'torsha.ai' },
+      { name: 'SHAP / Explainability', usedIn: 'torsha.ai' },
+      { name: 'R' },
+    ],
+  },
+  {
+    name: 'Retrieval & LLMs',
+    blurb: 'Grounding language models in real data.',
+    skills: [
+      { name: 'LangChain', usedIn: 'ChaosTrack' },
+      { name: 'LangSmith', usedIn: 'ChaosTrack' },
+      { name: 'RAG', usedIn: 'ChaosTrack' },
+      { name: 'Milvus', usedIn: 'ChaosTrack' },
+      { name: 'CLIP / OWL-ViT', usedIn: 'Multimodal search' },
+      { name: 'OpenAI API', usedIn: 'ChaosTrack' },
+      { name: 'LLaMA 2' },
+      { name: 'Prompt engineering', usedIn: 'ChaosTrack' },
+      { name: 'Fine-tuning' },
+    ],
+  },
+  {
+    name: 'Serving & Apps',
+    blurb: 'Putting models in front of people.',
+    skills: [
+      { name: 'Node.js', usedIn: 'ChaosTrack' },
+      { name: 'Express', usedIn: 'ChaosTrack' },
+      { name: 'GraphQL', usedIn: 'ChaosTrack' },
+      { name: 'Hasura', usedIn: 'ChaosTrack' },
+      { name: 'REST APIs', usedIn: 'ChaosTrack' },
+      { name: 'JavaScript' },
+      { name: 'Java' },
+      { name: 'Streamlit', usedIn: 'Real-time stock prediction' },
+      { name: 'Plotly / D3.js', usedIn: 'torsha.ai' },
+      { name: 'TCP / UDP streaming', usedIn: 'COSMOS Labs' },
+    ],
+  },
+];

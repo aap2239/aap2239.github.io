@@ -1,0 +1,174 @@
+---
+import JourneyMap from '@/components/JourneyMap.astro';
+import { journey } from '@/data/journey';
+---
+
+<section id="journey" class="chapter journey" aria-labelledby="journey-title">
+  <div class="journey__stage" data-journey-stage>
+    <div class="container journey__inner">
+      <header class="chapter__head journey__head" data-reveal>
+        <p class="eyebrow"><b>02</b> — Route</p>
+        <h2 id="journey-title" class="chapter__title">Four cities, <em>one direction</em>.</h2>
+      </header>
+
+      <div class="journey__map">
+        <JourneyMap />
+      </div>
+
+      <ol class="journey__captions" data-journey-captions>
+        <span class="journey__line" aria-hidden="true"><span data-journey-line></span></span>
+        {journey.map((s, i) => (
+          <li class:list={['journey__cap', { 'is-todo': s.todo }]} data-cap={i}>
+            <p class="eyebrow journey__cap-meta">
+              <b>0{i + 1}</b> — {s.city}, {s.country} · {s.years}
+            </p>
+            <h3 class="journey__cap-title">{s.title}</h3>
+            <p class="journey__cap-blurb muted">{s.blurb}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey {
+    padding-block: 0;
+  }
+  .journey__stage {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-8);
+  }
+  .journey__inner {
+    display: grid;
+    gap: var(--space-5);
+    width: min(100% - 2 * var(--gutter), var(--container));
+  }
+  .journey__head {
+    margin-bottom: 0;
+  }
+  .journey__map {
+    display: flex;
+    justify-content: center;
+  }
+  .journey__map :global(.map) {
+    width: auto;
+    max-width: 100%;
+    max-height: 46vh;
+  }
+  .journey__captions {
+    position: relative;
+    min-height: 11.5rem;
+  }
+  .journey__cap {
+    display: grid;
+    gap: var(--space-2);
+    max-width: 62ch;
+  }
+  .journey__cap-title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .journey__cap.is-todo .journey__cap-blurb {
+    outline: 1px dashed var(--accent);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+  .journey__line {
+    display: none;
+  }
+
+  /* Desktop: captions stack and crossfade under the map. */
+  @media (min-width: 768px) {
+    .journey__cap {
+      position: absolute;
+      inset: 0 auto auto 0;
+    }
+    :global(html.js) .journey__cap {
+      opacity: 0;
+    }
+    :global(html.js) .journey__cap:first-child {
+      opacity: 1;
+    }
+  }
+
+  /* Mobile: no map, a vertical timeline instead. */
+  @media (max-width: 767px) {
+    .journey__stage {
+      min-height: 0;
+      padding-block: var(--section-pad);
+    }
+    .journey__head {
+      margin-bottom: var(--space-4);
+    }
+    .journey__map {
+      display: none;
+    }
+    .journey__captions {
+      display: grid;
+      gap: var(--space-7);
+      padding-left: 2rem;
+    }
+    .journey__line {
+      display: block;
+      position: absolute;
+      left: 0.45rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: var(--line-strong);
+    }
+    .journey__line > span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      transform-origin: top;
+    }
+    .journey__cap {
+      position: relative;
+    }
+    .journey__cap::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.45rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+    :global(html.js) .journey__cap {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .journey__cap {
+      opacity: 1 !important;
+    }
+    .journey__line > span {
+      transform: none !important;
+    }
+    @media (min-width: 768px) {
+      /* Show only the latest stop statically; the rest are read in DOM order. */
+      .journey__cap:not(:last-child) {
+        position: static;
+        opacity: 1;
+      }
+      .journey__captions {
+        display: grid;
+        gap: var(--space-5);
+      }
+      .journey__cap {
+        position: static;
+      }
+      .journey__stage {
+        min-height: 0;
+      }
+    }
+  }
+</style>
