@@ -45,11 +45,14 @@ export const projects: Project[] = [
   },
 
   // ---------- Open source ----------
+  // Only entries with `showcase: true` are shown on the site (three at a time reads best).
+  // Everything else stays here so it is one edit away from appearing.
   {
     slug: 'real-time-stock-prediction',
     title: 'Real-time stock prediction',
     kind: 'Streaming ML',
     year: '2023',
+    showcase: true,
     description:
       'Sentiment analysis on 5M+ daily tweets streamed through Pub/Sub, Apache Beam, and Dataflow into BigQuery, improving price prediction by 12% over the baseline.',
     metrics: [
@@ -64,6 +67,7 @@ export const projects: Project[] = [
     title: 'LLaMA 2 with RAG',
     kind: 'LLM · Retrieval',
     year: '2024',
+    showcase: true,
     description:
       'Retrieval-augmented generation with LLaMA 2 running fully on a local machine, backed by a vector database for grounded answers over private documents.',
     tags: ['LLaMA 2', 'RAG', 'Vector DB', 'Python'],
@@ -94,6 +98,7 @@ export const projects: Project[] = [
     title: 'Transformer from scratch',
     kind: 'NLP · From first principles',
     year: '2024',
+    showcase: true,
     description:
       'English to Italian neural machine translation with a 6-layer encoder–decoder transformer written from scratch in PyTorch. Trained on OPUS Books with TensorBoard monitoring.',
     tags: ['PyTorch', 'Transformers', 'Attention', 'Hugging Face Datasets'],
@@ -172,4 +177,4 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
-export const openSourceProjects = projects.filter((p) => !p.featured);
+export const openSourceProjects = projects.filter((p) => !p.featured && p.showcase);

@@ -32,7 +32,7 @@ All copy lives in `src/data/`. You should never need to touch a component to cha
 | --- | --- |
 | `site.ts` | Name, role, hero headline lines, about paragraphs and stats, contact copy, social links, nav items |
 | `experience.ts` | Work history (newest first). Entries with `todo: true` render with a dashed outline. |
-| `projects.ts` | Featured case studies (`featured: true`) and the open-source grid |
+| `projects.ts` | Featured case studies (`featured: true`) and the open-source grid. Only repos with `showcase: true` are shown; the rest are kept in the file for easy swapping. |
 | `skills.ts` | The four pipeline stages. Add `usedIn` to a skill to give it the amber dot. |
 | `education.ts` | Degrees |
 | `journey.ts` | The four map stops. `x`/`y` are positions inside a 1200 x 520 canvas. |

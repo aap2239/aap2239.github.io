@@ -38,6 +38,8 @@ export interface Project {
   kind: string;
   year: string;
   featured?: boolean;
+  /** Non-featured projects only appear in the open-source grid when this is true. */
+  showcase?: boolean;
   /** Featured cards use problem/approach/outcome; compact cards use description. */
   problem?: string;
   approach?: string;

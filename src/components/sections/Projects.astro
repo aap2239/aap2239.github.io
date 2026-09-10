@@ -11,9 +11,9 @@ import { featuredProjects, openSourceProjects } from '@/data/projects';
 
   <div class="oss">
     <div class="oss__head" data-reveal>
-      <h3 class="oss__title">Open source & experiments</h3>
-      <a class="oss__all" href="https://github.com/aap2239" target="_blank" rel="noopener">
-        All repositories ↗<span class="visually-hidden"> (opens in new tab)</span>
+      <h3 class="oss__title">Open source, three picks</h3>
+      <a class="oss__all" href="https://github.com/aap2239?tab=repositories" target="_blank" rel="noopener">
+        All repositories on GitHub ↗<span class="visually-hidden"> (opens in new tab)</span>
       </a>
     </div>
     <div class="grid" data-reveal-group>
@@ -54,7 +54,7 @@ import { featuredProjects, openSourceProjects } from '@/data/projects';
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: var(--space-4);
   }
 </style>
