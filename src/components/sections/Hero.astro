@@ -1,7 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
 import headshot from '@/assets/headshot.jpg';
-import MetricChip from '@/components/MetricChip.astro';
 import { site } from '@/data/site';
 const { hero } = site;
 ---
@@ -51,11 +50,6 @@ const { hero } = site;
         <span class="hero__halftone" aria-hidden="true"></span>
         <figcaption class="visually-hidden">Portrait of Aishwarya Patange</figcaption>
       </figure>
-      <ul class="hero__metrics" aria-label="Selected results">
-        {hero.metrics.map((m) => (
-          <li><MetricChip metric={m} /></li>
-        ))}
-      </ul>
     </div>
   </div>
 
@@ -132,9 +126,9 @@ const { hero } = site;
 
   .hero__side {
     display: grid;
-    gap: var(--space-5);
     max-width: 400px;
     justify-self: end;
+    align-self: center;
     width: 100%;
   }
   .hero__portrait {
@@ -145,7 +139,7 @@ const { hero } = site;
   .hero__portrait :global(img) {
     width: 100%;
     height: auto;
-    aspect-ratio: 5 / 6;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: center 18%;
     filter: grayscale(1) contrast(1.15) brightness(0.95);
@@ -158,18 +152,6 @@ const { hero } = site;
       radial-gradient(rgb(16 16 16 / 0.55) 1.1px, transparent 1.4px);
     background-size: 100% 100%, 5px 5px;
   }
-  .hero__metrics {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-  }
-  .hero__metrics li {
-    padding: var(--space-4) var(--space-4);
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-
   .hero__strip {
     border-top: 1px solid var(--line);
     padding-block: var(--space-4);
@@ -195,16 +177,6 @@ const { hero } = site;
     }
     .hero__side {
       justify-self: start;
-      max-width: 100%;
-      grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
-      align-items: end;
-    }
-  }
-  @media (max-width: 560px) {
-    .hero__side {
-      grid-template-columns: 1fr;
-    }
-    .hero__portrait {
       max-width: 260px;
     }
   }
