@@ -7,7 +7,7 @@ import { journey } from '@/data/journey';
   <div class="journey__stage" data-journey-stage>
     <div class="container journey__inner">
       <header class="chapter__head journey__head" data-reveal>
-        <p class="eyebrow"><b>02</b> — Route</p>
+        <p class="eyebrow eyebrow--dash"><b>02</b> Route</p>
         <h2 id="journey-title" class="chapter__title">Four cities, <em>one direction</em>.</h2>
       </header>
 
@@ -20,9 +20,9 @@ import { journey } from '@/data/journey';
         {journey.map((s, i) => (
           <li class:list={['journey__cap', { 'is-todo': s.todo }]} data-cap={i}>
             <p class="eyebrow journey__cap-meta">
-              <b>0{i + 1}</b> — {s.city}, {s.country} · {s.years}
+              <b>0{i + 1}</b> {s.city}, {s.country} · {s.years}
             </p>
-            <h3 class="journey__cap-title">{s.title}</h3>
+            <h3 class="journey__cap-title display">{s.title}</h3>
             <p class="journey__cap-blurb muted">{s.blurb}</p>
           </li>
         ))}
@@ -68,8 +68,7 @@ import { journey } from '@/data/journey';
     max-width: 62ch;
   }
   .journey__cap-title {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
   }
   .journey__cap.is-todo .journey__cap-blurb {
     outline: 1px dashed var(--accent);
@@ -137,7 +136,6 @@ import { journey } from '@/data/journey';
       top: 0.45rem;
       width: 14px;
       height: 14px;
-      border-radius: 50%;
       background: var(--bg);
       border: 2px solid var(--accent);
       box-shadow: 0 0 0 4px var(--bg);

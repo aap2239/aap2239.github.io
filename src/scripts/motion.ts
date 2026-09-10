@@ -34,14 +34,13 @@ export function boot(): void {
       reduce: '(prefers-reduced-motion: reduce)',
       desktop: '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
       mobile: '(max-width: 767px) and (prefers-reduced-motion: no-preference)',
-      fine: '(pointer: fine)',
     },
     (ctx) => {
-      const c = ctx.conditions as { reduce: boolean; desktop: boolean; fine: boolean };
+      const c = ctx.conditions as { reduce: boolean; desktop: boolean };
       if (c.reduce) return; // CSS renders the static state; nothing to do.
 
       const lenis = c.desktop ? createLenis() : null;
-      const cleanups: Cleanup[] = [initHero({ desktop: c.desktop, fine: c.fine })];
+      const cleanups: Cleanup[] = [initHero({ desktop: c.desktop })];
 
       // Everything below the fold is set up in a second task so the first
       // interaction is never blocked by ScrollTrigger measuring the page.

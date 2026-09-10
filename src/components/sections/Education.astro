@@ -8,7 +8,7 @@ import { education } from '@/data/education';
     {education.map((e) => (
       <article class="edu__card">
         <p class="eyebrow">{e.start} – {e.end} · {e.location}</p>
-        <h3 class="edu__school">
+        <h3 class="edu__school display">
           <a href={e.href} target="_blank" rel="noopener">{e.school}<span class="visually-hidden"> (opens in new tab)</span></a>
         </h3>
         <p class="edu__degree">
@@ -38,8 +38,7 @@ import { education } from '@/data/education';
     background: var(--bg-2);
   }
   .edu__school {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
   }
   .edu__school a {
     text-decoration: none;
@@ -68,7 +67,6 @@ import { education } from '@/data/education';
     top: 0.7em;
     width: 5px;
     height: 5px;
-    border-radius: 50%;
     background: var(--accent);
   }
 </style>

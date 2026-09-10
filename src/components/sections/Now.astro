@@ -10,7 +10,7 @@ import { now, nowUpdated } from '@/data/now';
         <div class:list={['now__item', { 'is-todo': item.todo }]}>
           <dt class="eyebrow">{item.label}</dt>
           <dd>
-            <span class="now__value">{item.value}</span>
+            <span class="now__value display">{item.value}</span>
             {item.detail && <span class="now__detail muted">{item.detail}</span>}
           </dd>
         </div>
@@ -41,9 +41,8 @@ import { now, nowUpdated } from '@/data/now';
     gap: var(--space-1);
   }
   .now__value {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.15;
+    font-size: var(--step-1);
+    line-height: 1.05;
   }
   .now__detail {
     font-size: var(--step--1);
@@ -55,11 +54,9 @@ import { now, nowUpdated } from '@/data/now';
   }
   .now__stamp {
     justify-self: start;
-    padding: 0.5em 0.9em;
+    padding: 0.6em 0.9em;
     border: 1px solid var(--accent);
-    border-radius: 4px;
     color: var(--accent);
-    transform: rotate(-2deg);
   }
   @media (max-width: 640px) {
     .now__list {

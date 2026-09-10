@@ -11,7 +11,7 @@ import { featuredProjects, openSourceProjects } from '@/data/projects';
 
   <div class="oss">
     <div class="oss__head" data-reveal>
-      <h3 class="oss__title">Open source, three picks</h3>
+      <h3 class="oss__title display">Open source, three picks</h3>
       <a class="oss__all" href="https://github.com/aap2239?tab=repositories" target="_blank" rel="noopener">
         All repositories on GitHub ↗<span class="visually-hidden"> (opens in new tab)</span>
       </a>
@@ -41,11 +41,13 @@ import { featuredProjects, openSourceProjects } from '@/data/projects';
     flex-wrap: wrap;
   }
   .oss__title {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
   }
   .oss__all {
+    font-family: var(--font-mono);
     font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--fg-muted);
     text-decoration: none;
   }

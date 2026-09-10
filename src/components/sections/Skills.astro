@@ -6,14 +6,14 @@ import { skillStages } from '@/data/skills';
 <Chapter id="skills" number="05" eyebrow="Toolbox" titleHtml="The pipeline I <em>ship</em> with.">
   <p class="skills__intro muted measure" data-reveal>
     No proficiency bars. These are the tools behind the work above, grouped the way a project actually flows.
-    Anything with an amber dot has shipped in something on this page.
+    Anything with a red mark has shipped in something on this page.
   </p>
 
   <div class="pipe" data-pipe>
     <span class="pipe__line" aria-hidden="true"><span data-pipe-line></span></span>
     {skillStages.map((stage, i) => (
       <div class="pipe__stage" data-reveal-group>
-        <h3 class="pipe__name">
+        <h3 class="pipe__name display">
           <span class="pipe__idx" aria-hidden="true">0{i + 1}</span>
           {stage.name}
         </h3>
@@ -72,8 +72,7 @@ import { skillStages } from '@/data/skills';
     display: flex;
     align-items: baseline;
     gap: var(--space-3);
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
   }
   .pipe__idx {
     font-family: var(--font-mono);
@@ -98,7 +97,6 @@ import { skillStages } from '@/data/skills';
     top: 50%;
     width: 6px;
     height: 6px;
-    border-radius: 50%;
     background: var(--accent);
     transform: translateY(-50%);
   }

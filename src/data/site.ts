@@ -15,10 +15,20 @@ export const site = {
   ogImage: '/og.jpg',
   hero: {
     eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
-    lines: ['I build ML systems', 'that actually', 'ship.'],
-    /** Which line gets the italic accent treatment (0-based). */
+    lines: ['Machine', 'learning,', 'made in', 'New York.'],
+    /** Which line is set in the accent color (0-based). */
     accentLine: 2,
-    sub: 'Data scientist at Gartner. Before that: an AutoML platform built from scratch, computer vision on a live city testbed at Columbia, and LLM systems for cybersecurity. I like the whole pipeline, from messy data to something people use.',
+    sub: 'Data scientist at Gartner. Built an AutoML platform from scratch, trained detectors on live city intersections at Columbia, and shipped LLM systems for cybersecurity. I like the whole pipeline, from messy data to something people use.',
+    /** Numbers shown under the portrait. */
+    metrics: [
+      { value: 0.79, decimals: 2, label: 'mAP, detection' },
+      { value: 80, suffix: ' ms', label: 'stream latency' },
+      { value: 15, prefix: '+', suffix: '%', label: 'AutoML accuracy' },
+      { value: 5, suffix: 'M+', label: 'tweets / day' },
+    ],
+    status: 'Open to conversations · 2026',
+    /** The strip along the bottom of the hero. */
+    strip: ['Gartner', 'Columbia University', 'torsha.ai', 'COSMOS Labs', 'ChaosTrack', 'Mumbai → New York'],
   },
   about: {
     lead: 'I started in Mumbai as an electronics engineer who spent more time training models than soldering boards.',

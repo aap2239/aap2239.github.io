@@ -6,7 +6,7 @@ import { nav, site } from '@/data/site';
   <div class="nav__inner container">
     <a class="nav__brand" href="#top">
       <span class="nav__mark" aria-hidden="true">A</span>
-      <span class="nav__name">{site.firstName}</span>
+      <span class="nav__name">{site.name}</span>
       <span class="visually-hidden">, back to top</span>
     </a>
     <nav aria-label="Primary">
@@ -40,9 +40,9 @@ import { nav, site } from '@/data/site';
     will-change: transform;
   }
   .nav.is-scrolled {
-    background: rgb(10 10 11 / 0.72);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background: rgb(16 16 16 / 0.85);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     border-color: var(--line);
   }
   .nav.is-hidden {
@@ -58,25 +58,24 @@ import { nav, site } from '@/data/site';
   .nav__brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
     text-decoration: none;
     min-height: 44px;
   }
   .nav__mark {
     display: grid;
     place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
+    width: 30px;
+    height: 30px;
     background: var(--accent);
-    color: var(--accent-ink);
+    color: var(--bg);
     font-family: var(--font-display);
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     line-height: 1;
-    padding-top: 1px;
   }
   .nav__name {
-    font-weight: 500;
+    font-weight: 600;
+    font-size: var(--step--1);
     letter-spacing: -0.01em;
   }
   .nav__list {
@@ -89,8 +88,10 @@ import { nav, site } from '@/data/site';
     align-items: center;
     min-height: 44px;
     padding-inline: 0.5rem;
+    font-family: var(--font-mono);
     font-size: var(--step--1);
-    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--fg-muted);
     text-decoration: none;
     transition: color var(--dur-fast) var(--ease-out);
@@ -100,12 +101,17 @@ import { nav, site } from '@/data/site';
     color: var(--fg);
   }
   .nav__resume {
-    color: var(--accent) !important;
+    background: var(--fg);
+    color: var(--bg) !important;
+    padding-inline: 0.9rem !important;
+    min-height: 36px !important;
+    margin-left: 0.5rem;
+  }
+  .nav__resume:hover {
+    background: var(--accent);
   }
   @media (max-width: 767px) {
-    .nav__item--desktop {
-      display: none;
-    }
+    .nav__item--desktop,
     .nav__name {
       display: none;
     }

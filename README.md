@@ -2,6 +2,8 @@
 
 Personal site for Aishwarya Patange. Astro 7, GSAP ScrollTrigger, Lenis. Static output, deployed to GitHub Pages by GitHub Actions.
 
+Design: black canvas, off-white type, one red. Archivo Black for headlines, Archivo for body, Courier Prime for labels. Square corners everywhere. Tokens live in `src/styles/tokens.css`.
+
 ## Run it locally
 
 Node is installed through fnm, which is not on the PATH in a fresh shell. In PowerShell:

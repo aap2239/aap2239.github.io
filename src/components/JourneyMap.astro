@@ -112,7 +112,7 @@ const gridY = Array.from({ length: 5 }, (_, i) => (i * H) / 4);
   .map__ring {
     fill: var(--accent-soft);
     stroke: var(--accent);
-    stroke-width: 1;
+    stroke-width: 1.5;
     vector-effect: non-scaling-stroke;
   }
   .map__dot {
@@ -125,8 +125,9 @@ const gridY = Array.from({ length: 5 }, (_, i) => (i * H) / 4);
   .map__label {
     fill: var(--fg);
     font-family: var(--font-display);
-    font-size: 30px;
-    letter-spacing: -0.01em;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
   }
   .map__years {
     fill: var(--fg-muted);

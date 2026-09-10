@@ -1,39 +1,37 @@
-/* Design tokens. Single source of truth for color, type, spacing, motion. */
+/* Design tokens. Black, off-white, one red. Square geometry. */
 :root {
   color-scheme: dark;
 
   /* Surfaces */
-  --bg: #0a0a0b;
-  --bg-2: #121214;
-  --bg-3: #1a1a1d;
-  --line: rgb(237 234 228 / 0.1);
-  --line-strong: rgb(237 234 228 / 0.18);
+  --bg: #101010;
+  --bg-2: #171717;
+  --bg-3: #1f1f1f;
+  --line: #2a2a2a;
+  --line-strong: #3d3d3d;
 
   /* Text */
-  --fg: #edeae4;
-  --fg-muted: #a8a39b;
-  --fg-faint: #6b675f; /* decorative only, never body text */
+  --fg: #f4f4f2;
+  --fg-muted: #c9c9c4;
+  --fg-faint: #8a8a86; /* labels and decorative text only */
 
   /* Accent */
-  --accent: #f2a33a;
-  --accent-hover: #ffc466;
-  --accent-ink: #1a1000;
-  --accent-glow: rgb(242 163 58 / 0.16);
-  --accent-glow-2: rgb(120 70 30 / 0.14);
-  --accent-soft: rgb(242 163 58 / 0.12);
+  /* #ea4535 clears 4.5:1 on the black canvas for small text; black ink on it clears 4.5:1 too. */
+  --accent: #ea4535;
+  --accent-hover: #f2574a;
+  --accent-ink: #101010;
+  --accent-soft: rgb(234 69 53 / 0.14);
 
-  /* Type */
-  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
-  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  /* Type: --font-display, --font-body, --font-mono are set by Astro's font loader. */
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
   --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --step-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
-  --step-2: clamp(1.6rem, 1.3rem + 1.2vw, 2.4rem);
-  --step-3: clamp(2.2rem, 1.6rem + 2.5vw, 3.6rem);
-  --step-4: clamp(3rem, 1.8rem + 5vw, 6rem);
-  --step-5: clamp(3.4rem, 1.6rem + 8vw, 9rem);
-  --leading-tight: 0.98;
-  --leading-body: 1.6;
-  --tracking-display: -0.02em;
+  --step-1: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2.2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
+  --step-4: clamp(2.6rem, 1.5rem + 4.8vw, 5.4rem);
+  --step-5: clamp(3rem, 1.4rem + 7vw, 7.5rem);
+  --leading-tight: 0.9;
+  --leading-body: 1.55;
+  --tracking-display: -0.03em;
   --tracking-mono: 0.08em;
 
   /* Space */
@@ -50,16 +48,16 @@
   --section-pad: clamp(4.5rem, 10vw, 9rem);
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
   --measure: 62ch;
-  --container: 1200px;
-  --radius-sm: 6px;
-  --radius: 12px;
-  --radius-lg: 20px;
+  --container: 1240px;
+  --radius-sm: 0px;
+  --radius: 0px;
+  --radius-lg: 0px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 200ms;
-  --dur: 400ms;
+  --dur-fast: 180ms;
+  --dur: 380ms;
 
   /* Layers */
   --z-grain: 50;

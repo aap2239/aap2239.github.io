@@ -27,7 +27,7 @@ import { experience } from '@/data/experience';
             <p class="eyebrow">
               {e.start} – {e.end} · {e.location}
             </p>
-            <h3 class="xp__title">
+            <h3 class="xp__title display">
               {e.role}{' '}
               <span class="xp__at">
                 at{' '}
@@ -97,11 +97,11 @@ import { experience } from '@/data/experience';
     font-size: var(--step-4);
     color: var(--accent);
     line-height: 1;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
   .xp__company {
     font-size: var(--step-1);
-    font-weight: 500;
+    font-weight: 600;
   }
   .xp__list {
     position: relative;
@@ -141,14 +141,15 @@ import { experience } from '@/data/experience';
     gap: var(--space-2);
   }
   .xp__title {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-size: var(--step-1);
+    line-height: 1.05;
   }
   .xp__at {
-    color: var(--fg-muted);
+    color: var(--fg-faint);
   }
   .xp__at a {
     color: var(--fg);
+    text-decoration-color: var(--accent);
   }
   .xp__todo {
     padding: var(--space-3) var(--space-4);
@@ -179,10 +180,9 @@ import { experience } from '@/data/experience';
     content: '';
     position: absolute;
     left: 0;
-    top: 0.65em;
+    top: 0.7em;
     width: 6px;
     height: 6px;
-    border-radius: 50%;
     background: var(--accent);
   }
   .xp__metrics {
