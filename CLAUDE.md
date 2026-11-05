@@ -25,7 +25,7 @@ The point of this site is that it does not read as machine-made. Default LLM sty
 
 **Do not use:**
 
-- **Tags and pills.** No bordered chips for technologies, skills or categories. Write them as a sentence or a plain comma-separated line.
+- **Tags and pills.** No bordered chips for technologies, skills or categories. Write them as a sentence or a plain comma-separated line. *One exception, agreed deliberately: the skill stages in the "pipeline I ship with" section are pills, with a red mark on the tools she has actually shipped with. A stage is a set of interchangeable tools, so it reads better as a cloud than a list. Do not extend this to the work or project sections, and do not strip it from Skills.*
 - **Italics for emphasis.** No accent-coloured `<em>` inside headings. If a heading needs a lift, rewrite the heading.
 - **Instrument Serif.** The fonts are Archivo Black (display) and Archivo (body). Do not add a third.
 - **Negative letter-spacing.** Tracking stays at 0 or positive. No `-0.03em` display tracking.

@@ -6,7 +6,7 @@ import { skillStages } from '@/data/skills';
 <Chapter id="skills" title="The pipeline I ship with">
   <p class="skills__intro muted measure" data-reveal>
     No proficiency bars. These are the tools behind the work above, grouped the way a project actually
-    flows. The ones in white have shipped in something on this page.
+    flows. Anything with a red mark has shipped in something on this page.
   </p>
 
   <div class="pipe" data-pipe>
@@ -56,15 +56,37 @@ import { skillStages } from '@/data/skills';
     font-size: var(--step--1);
     min-height: 2.6em;
   }
+  /* Pills are a deliberate exception to the no-chips rule, and live only here:
+     a stage is a set of interchangeable tools, so they read better as a cloud
+     than as a list. Sentence case and body font, not mono caps. */
   .pipe__skills {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--space-2);
+  }
+  .pipe__skills li {
+    display: inline-block;
+    padding: 0.35em 0.7em;
+    border: 1px solid var(--line);
     font-size: var(--step--1);
     color: var(--fg-muted);
+    white-space: nowrap;
   }
-  /* Tools she has actually shipped with read in full strength; the rest sit back. */
+  /* The red mark flags a tool she has actually shipped with. */
   .pipe__skills .is-used {
+    position: relative;
+    padding-left: 1.5em;
     color: var(--fg);
+  }
+  .pipe__skills .is-used::before {
+    content: '';
+    position: absolute;
+    left: 0.65em;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: translateY(-50%);
   }
   @media (max-width: 1023px) {
     .pipe {
