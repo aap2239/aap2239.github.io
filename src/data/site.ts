@@ -16,7 +16,7 @@ export const site = {
    * Admin > Data streams > your web stream. Leave empty to disable analytics.
    * Not a secret, and only ever loaded in production builds.
    */
-  gaId: '',
+  gaId: 'G-522XHNFF39',
   hero: {
     eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
     lines: ['Machine', 'learning,', 'made in', 'New York'],
