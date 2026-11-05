@@ -7,7 +7,7 @@ export const site = {
   location: 'New York, NY',
   email: 'aishwaryapatange@gmail.com',
   url: 'https://aap2239.github.io',
-  title: 'Aishwarya Patange — Data Scientist / ML Engineer',
+  title: 'Aishwarya Patange · Data Scientist',
   description:
     'Data scientist and ML engineer in New York. Built an AutoML platform from scratch, computer vision on a live smart-city testbed at Columbia, and LLM systems for cybersecurity. Currently at Gartner.',
   /** Drop your real PDF at public/resume.pdf to replace the placeholder. */
