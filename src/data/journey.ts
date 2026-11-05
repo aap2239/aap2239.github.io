@@ -61,11 +61,11 @@ export const journey: JourneyStop[] = [
  *  - tail:  beat at the very end before the section unpins
  */
 export const pacing = {
-  hold: 0.7,
-  legs: [1.3, 2.2, 0.9],
-  world: 1.4,
-  tail: 0.5,
-  scrollPerUnit: 75,
+  hold: 0.6,
+  legs: [0.9, 1.5, 0.65],
+  world: 0.9,
+  tail: 0.3,
+  scrollPerUnit: 55,
 };
 
 /**

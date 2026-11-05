@@ -11,6 +11,12 @@ export const site = {
   description:
     'Data scientist and ML engineer in New York. Built an AutoML platform from scratch, computer vision on a live smart-city testbed at Columbia, and LLM systems for cybersecurity. Currently at Gartner.',
   ogImage: '/og.jpg',
+  /**
+   * Google Analytics 4 Measurement ID, e.g. 'G-ABC1234XYZ'. Find it in GA under
+   * Admin > Data streams > your web stream. Leave empty to disable analytics.
+   * Not a secret, and only ever loaded in production builds.
+   */
+  gaId: '',
   hero: {
     eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
     lines: ['Machine', 'learning,', 'made in', 'New York'],
