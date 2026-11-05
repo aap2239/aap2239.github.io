@@ -1,14 +1,13 @@
 import type { NowItem } from './types';
 
 /** Update this whenever life changes. The stamp below is shown on the page. */
-export const nowUpdated = 'September 2026';
+export const nowUpdated = 'November 2026';
 
 export const now: NowItem[] = [
   {
     label: 'Building',
-    value: 'TODO: what you are building right now',
-    detail: 'At work or on the side. One line is enough.',
-    todo: true,
+    value: 'An agent that documents my life',
+    detail: 'Phone, laptop, and speech capture stitched into a searchable diary. Retrieval again, on far messier data than work.',
   },
   {
     label: 'Reading',

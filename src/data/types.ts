@@ -94,7 +94,3 @@ export interface NowItem {
   todo?: boolean;
 }
 
-export interface Hobby {
-  title: string;
-  line: string;
-}

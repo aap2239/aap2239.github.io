@@ -45,11 +45,10 @@ export const journey: JourneyStop[] = [
     years: '2024 – now',
     title: 'Gartner',
     blurb:
-      'Data science at Gartner, with the office in Stamford and home still in New York. TODO: one line on what you work on and why it matters.',
+      'Data science at Gartner, with the office in Stamford and home still in New York. Retention analytics: probabilistic account scoring across 10,000+ enterprise clients, and the evaluation framework behind an internal RAG assistant.',
     lat: 41.053,
     lon: -73.539,
     label: 'above',
-    todo: true,
   },
 ];
 

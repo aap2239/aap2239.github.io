@@ -7,26 +7,31 @@ import type { Experience } from './types';
 export const experience: Experience[] = [
   {
     company: 'Gartner',
-    role: 'Data Scientist', // TODO: confirm exact title
+    role: 'Data Science',
     location: 'Stamford, CT · based in New York',
-    start: 'Jan 2024',
+    start: 'Jun 2024',
     end: 'Present',
     year: '2024',
-    summary: 'TODO: One sentence on what you own at Gartner and who uses it.',
+    summary:
+      'Retention and growth analytics for Gartner’s enterprise client base, owning the models that tell account teams which relationships need attention and why.',
     bullets: [
-      'TODO: The system, model, or product surface you own, and who depends on it.',
-      'TODO: One result with a number (accuracy, latency, hours saved, adoption, revenue).',
-      'TODO: A hard problem you solved and how (data quality, scale, evaluation, deployment).',
-      'TODO: The stack you work in day to day (e.g., Python, Spark, Snowflake, Airflow, LLM tooling).',
+      'Architected and launched the Implied Value Rating model, an account-level probabilistic score covering 10,000+ enterprise clients at 94% accuracy, now in production triggering proactive retention action and contributing to a $295M revenue opportunity.',
+      'Engineered the feature pipeline behind the customer segmentation and propensity models, combining behavioral engagement signals with MiniLM topical embeddings into cohort-level features that lifted AUC by 7% over an unsegmented baseline.',
+      'Partnered with Sales Analytics on next-best-program targeting and recommendation models, batch-scoring 134.5K prospects and projecting $40M in savings from discontinuing low-performing programs.',
+      'Stitched two disparate internal sources, Surveys and Case Studies, into a single unified layer, owning the path from raw documents through the extraction pipeline to the OpenSearch indexes served at query time.',
+      'Built the evaluation framework for Research Desk, an internal RAG assistant, from scratch on Langfuse, pairing LLM-as-a-Judge checks for numeric grounding, fact attribution, and named-entity correctness with Precision@K and Recall@K per query category, lifting retrieval pass rate from 43% to 78% and factual accuracy by 13%.',
     ],
-    metrics: [],
-    tags: ['Python', 'TODO'],
+    metrics: [
+      { value: 94, suffix: '%', label: 'IVR prediction accuracy' },
+      { value: 295, prefix: '$', suffix: 'M', label: 'revenue opportunity' },
+      { value: 78, suffix: '%', label: 'RAG retrieval pass rate, from 43%' },
+    ],
+    tags: ['Python', 'MiniLM', 'OpenSearch', 'Langfuse', 'RAG', 'LLM-as-a-Judge'],
     href: 'https://www.gartner.com/',
-    todo: true,
   },
   {
     company: 'COSMOS Labs, Columbia University',
-    role: 'Graduate Research Assistant',
+    role: 'Computer Vision Research',
     location: 'New York, NY',
     start: 'Jan 2023',
     end: 'Dec 2023',
@@ -49,7 +54,7 @@ export const experience: Experience[] = [
   },
   {
     company: 'ChaosTrack Inc.',
-    role: 'Software Developer Intern',
+    role: 'Software Development',
     location: 'New York, NY',
     start: 'Jun 2023',
     end: 'Sep 2023',
@@ -71,7 +76,7 @@ export const experience: Experience[] = [
   },
   {
     company: 'iQGateway',
-    role: 'Associate Data Scientist',
+    role: 'Machine Learning Engineering',
     location: 'Bangalore, India',
     start: 'May 2021',
     end: 'Jul 2022',

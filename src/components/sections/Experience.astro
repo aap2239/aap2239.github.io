@@ -2,27 +2,32 @@
 import Chapter from '@/components/Chapter.astro';
 import MetricChip from '@/components/MetricChip.astro';
 import { experience } from '@/data/experience';
+
+/** The scrubbing year starts at the present and counts back through the roles. */
+const startYear = String(new Date().getFullYear());
 ---
 
 <Chapter id="experience" number="03" eyebrow="Work" titleHtml="Where the work <em>happened</em>.">
   <div class="xp" data-xp>
     <div class="xp__side">
       <div class="xp__sticky" aria-hidden="true">
-        {experience.map((e, i) => (
-          <div class="xp__meta" data-xp-meta={i}>
-            <span class="xp__year display">{e.year}</span>
-            <span class="xp__company">{e.company}</span>
-            <span class="xp__role muted">{e.role}</span>
-            <span class="xp__dates eyebrow">{e.start} – {e.end}</span>
-          </div>
-        ))}
+        <span class="xp__year display" data-xp-year>{startYear}</span>
+        <div class="xp__metas">
+          {experience.map((e, i) => (
+            <div class="xp__meta" data-xp-meta={i}>
+              <span class="xp__company">{e.company}</span>
+              <span class="xp__role muted">{e.role}</span>
+              <span class="xp__dates eyebrow">{e.start} – {e.end}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
 
     <ol class="xp__list">
       <span class="xp__rule" aria-hidden="true"><span data-xp-fill></span></span>
       {experience.map((e, i) => (
-        <li class:list={['xp__card', { 'is-todo': e.todo }]} data-xp-card={i} data-reveal>
+        <li class:list={['xp__card', { 'is-todo': e.todo }]} data-xp-card={i} data-xp-year={e.year} data-reveal>
           <header class="xp__head">
             <p class="eyebrow">
               {e.start} – {e.end} · {e.location}
@@ -72,10 +77,20 @@ import { experience } from '@/data/experience';
     gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
   }
+  .xp__side {
+    /* The grid is align-items: start, which would size this column to its own
+       content and let the sticky block scroll away after a few hundred pixels.
+       Stretching it to the row height lets the year travel the whole section. */
+    align-self: stretch;
+  }
   .xp__sticky {
     position: sticky;
     top: 22vh;
     min-height: 16rem;
+  }
+  .xp__metas {
+    position: relative;
+    min-height: 7rem;
   }
   .xp__meta {
     position: absolute;
@@ -94,10 +109,13 @@ import { experience } from '@/data/experience';
     transform: none;
   }
   .xp__year {
+    display: block;
     font-size: var(--step-4);
     color: var(--accent);
     line-height: 1;
     margin-bottom: var(--space-3);
+    /* Keeps the box from jittering as the digits scrub. */
+    font-variant-numeric: tabular-nums;
   }
   .xp__company {
     font-size: var(--step-1);

@@ -5,7 +5,7 @@ export const site = {
   firstName: 'Aishwarya',
   role: 'Data Scientist / ML Engineer',
   location: 'New York, NY',
-  email: 'aap2239@columbia.edu',
+  email: 'aishwaryapatange@gmail.com',
   url: 'https://aap2239.github.io',
   title: 'Aishwarya Patange — Data Scientist / ML Engineer',
   description:
