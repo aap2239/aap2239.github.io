@@ -16,11 +16,6 @@ import { nav, site } from '@/data/site';
             <a href={item.href} data-spy={item.href.slice(1)}>{item.label}</a>
           </li>
         ))}
-        <li>
-          <a class="nav__resume" href={site.resumePath} target="_blank" rel="noopener">
-            Resume<span class="visually-hidden"> (PDF, opens in new tab)</span>
-          </a>
-        </li>
       </ul>
     </nav>
   </div>
@@ -96,16 +91,6 @@ import { nav, site } from '@/data/site';
   .nav__list a[aria-current='true'],
   .nav__list a:hover {
     color: var(--fg);
-  }
-  .nav__resume {
-    background: var(--fg);
-    color: var(--bg) !important;
-    padding-inline: 0.9rem !important;
-    min-height: 36px !important;
-    margin-left: 0.5rem;
-  }
-  .nav__resume:hover {
-    background: var(--accent);
   }
   @media (max-width: 767px) {
     .nav__item--desktop,

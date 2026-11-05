@@ -10,8 +10,6 @@ export const site = {
   title: 'Aishwarya Patange · Data Scientist',
   description:
     'Data scientist and ML engineer in New York. Built an AutoML platform from scratch, computer vision on a live smart-city testbed at Columbia, and LLM systems for cybersecurity. Currently at Gartner.',
-  /** Drop your real PDF at public/resume.pdf to replace the placeholder. */
-  resumePath: '/resume.pdf',
   ogImage: '/og.jpg',
   hero: {
     eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
