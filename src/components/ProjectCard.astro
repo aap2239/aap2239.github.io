@@ -13,7 +13,7 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
 
 <article class:list={['card', { 'card--featured': featured }]}>
   <div class="card__top">
-    <p class="eyebrow">{p.kind}</p>
+    <p class="label">{p.kind}</p>
     <span class="card__year">{p.year}</span>
   </div>
 
@@ -44,9 +44,7 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
   )}
 
   <div class="card__foot">
-    <ul class="tags" aria-label="Technologies">
-      {p.tags.map((t) => <li class="tag">{t}</li>)}
-    </ul>
+    <p class="toolline">{p.tags.join(', ')}</p>
     {href && (
       <span class="card__cta" aria-hidden="true">{linkLabel} ↗</span>
     )}
@@ -60,8 +58,8 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
     flex-direction: column;
     gap: var(--space-4);
     padding: clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--line);
-    background: var(--bg-2);
+    /* no border: cards group by spacing */
+    background: var(--bg);
     transition:
       border-color var(--dur-fast) var(--ease-out),
       background-color var(--dur-fast) var(--ease-out);
@@ -72,7 +70,7 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
   @media (hover: hover) {
     .card:hover {
       border-color: var(--fg);
-      background: var(--bg-3);
+      background: var(--bg);
     }
     .card:hover .card__cta {
       color: var(--accent);
@@ -88,9 +86,8 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
     gap: var(--space-3);
   }
   .card__year {
-    font-family: var(--font-mono);
     font-size: var(--step--1);
-    color: var(--fg-faint);
+    color: var(--fg-muted);
     white-space: nowrap;
   }
   .card__title {
@@ -127,10 +124,8 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
     gap: var(--space-3);
   }
   .card__story dt {
-    font-family: var(--font-mono);
     font-size: var(--step--1);
-    letter-spacing: var(--tracking-mono);
-    text-transform: uppercase;
+    
     color: var(--accent);
     padding-top: 0.35em;
   }
@@ -157,10 +152,8 @@ const linkLabel = p.link?.label ?? 'View on GitHub';
   }
   .card__cta {
     justify-self: end;
-    font-family: var(--font-mono);
     font-size: var(--step--1);
     letter-spacing: 0.06em;
-    text-transform: uppercase;
     color: var(--fg-muted);
     white-space: nowrap;
     transition: color var(--dur-fast) var(--ease-out);

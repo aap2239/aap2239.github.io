@@ -5,8 +5,6 @@ const { contact } = site;
 
 <section id="contact" class="chapter contact" aria-labelledby="contact-title">
   <div class="container contact__inner">
-    <p class="eyebrow eyebrow--dash" data-reveal><b>08</b> Contact</p>
-
     <h2 id="contact-title" class="contact__title display" data-reveal="lines">
       {contact.headline.map((line, i) => (
         <span class="mask-line"><span class:list={{ 'contact__accent': i === contact.headline.length - 1 }}>{line}</span></span>
@@ -15,7 +13,7 @@ const { contact } = site;
 
     <p class="contact__sub muted measure" data-reveal>{contact.sub}</p>
 
-    <a class="contact__email display" href={`mailto:${site.email}`} data-reveal>{site.email}</a>
+    <a class="contact__email" href={`mailto:${site.email}`} data-reveal>{site.email}</a>
 
     <div class="contact__actions" data-reveal-group>
       <a class="btn btn--primary" href={`mailto:${site.email}`}>Say hello</a>

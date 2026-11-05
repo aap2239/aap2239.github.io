@@ -37,15 +37,5 @@ export default defineConfig({
       display: 'swap',
       fallbacks: ['Helvetica Neue', 'Arial', 'sans-serif'],
     },
-    {
-      provider: fontProviders.google(),
-      name: 'Courier Prime',
-      cssVariable: '--font-mono',
-      weights: [400, 700],
-      styles: ['normal'],
-      subsets: ['latin'],
-      display: 'swap',
-      fallbacks: ['Courier New', 'monospace'],
-    },
   ],
 });

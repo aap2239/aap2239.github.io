@@ -1,23 +1,20 @@
 ---
 /**
- * Section wrapper: consistent padding, numbered eyebrow, accessible heading.
- * `titleHtml` may contain an <em> for the accent word.
+ * Section wrapper: consistent padding and an accessible heading.
+ * No number, no eyebrow — the heading carries the section on its own.
  */
 interface Props {
   id: string;
-  number: string;
-  eyebrow: string;
-  titleHtml: string;
+  title: string;
   class?: string;
 }
-const { id, number, eyebrow, titleHtml, class: className } = Astro.props;
+const { id, title, class: className } = Astro.props;
 ---
 
 <section id={id} class:list={['chapter', className]} aria-labelledby={`${id}-title`}>
   <div class="container">
     <header class="chapter__head" data-reveal>
-      <p class="eyebrow eyebrow--dash"><b>{number}</b> {eyebrow}</p>
-      <h2 id={`${id}-title`} class="chapter__title" set:html={titleHtml} />
+      <h2 id={`${id}-title`} class="chapter__title">{title}</h2>
     </header>
     <slot />
   </div>

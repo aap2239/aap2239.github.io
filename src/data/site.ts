@@ -15,7 +15,7 @@ export const site = {
   ogImage: '/og.jpg',
   hero: {
     eyebrow: 'Aishwarya Patange · Data Scientist / ML Engineer · New York, NY',
-    lines: ['Machine', 'learning,', 'made in', 'New York.'],
+    lines: ['Machine', 'learning,', 'made in', 'New York'],
     /** Which line is set in the accent color (0-based). */
     accentLine: 2,
     sub: 'Data scientist at Gartner. Built an AutoML platform from scratch, trained detectors on live city intersections at Columbia, and shipped LLM systems for cybersecurity. I like the whole pipeline, from messy data to something people use.',
@@ -36,7 +36,7 @@ export const site = {
     ],
   },
   contact: {
-    headline: ['Let’s build something', 'that ships.'],
+    headline: ['Let’s build something', 'that ships'],
     sub: 'Open to conversations about data science and ML engineering roles, collaborations, or a good chess game. My inbox is open.',
   },
 };

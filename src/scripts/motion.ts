@@ -15,7 +15,6 @@ import { initHero } from './sections/hero';
 import { initJourney } from './sections/journey';
 import { initExperience } from './sections/experience';
 import { initCounters } from './sections/counters';
-import { initSkills } from './sections/skills';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -52,7 +51,6 @@ export function boot(): void {
             initJourney({ desktop: c.desktop }),
             initExperience({ desktop: c.desktop }),
             initCounters(),
-            initSkills({ desktop: c.desktop }),
           );
         });
       const hasIdle = typeof window.requestIdleCallback === 'function';

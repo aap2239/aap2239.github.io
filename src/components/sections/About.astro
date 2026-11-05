@@ -5,15 +5,10 @@ import { site } from '@/data/site';
 const { about } = site;
 ---
 
-<Chapter
-  id="about"
-  number="01"
-  eyebrow="Story"
-  titleHtml="Five years of turning <em>messy data</em> into things people use."
->
+<Chapter id="about" title="Five years of turning messy data into things people use">
   <div class="about">
     <div class="about__lead-col">
-      <p class="about__lead display" data-reveal>{about.lead}</p>
+      <p class="about__lead" data-reveal>{about.lead}</p>
       <ul class="about__stats" data-reveal-group aria-label="At a glance">
         {about.stats.map((s) => (
           <li><MetricChip metric={s} size="lg" /></li>
@@ -40,8 +35,9 @@ const { about } = site;
   }
   .about__lead {
     font-size: var(--step-2);
-    line-height: 1.05;
-    max-width: 22ch;
+    line-height: 1.2;
+    max-width: 26ch;
+    text-wrap: balance;
   }
   .about__text {
     display: grid;
@@ -52,13 +48,10 @@ const { about } = site;
   .about__stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
+    gap: var(--space-6);
   }
   .about__stats li {
-    padding: var(--space-5) var(--space-4);
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    padding-block: var(--space-4);
   }
   @media (max-width: 767px) {
     .about {

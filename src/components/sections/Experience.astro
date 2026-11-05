@@ -7,7 +7,7 @@ import { experience } from '@/data/experience';
 const startYear = String(new Date().getFullYear());
 ---
 
-<Chapter id="experience" number="03" eyebrow="Work" titleHtml="Where the work <em>happened</em>.">
+<Chapter id="experience" title="Where the work happened">
   <div class="xp" data-xp>
     <div class="xp__side">
       <div class="xp__sticky" aria-hidden="true">
@@ -17,7 +17,7 @@ const startYear = String(new Date().getFullYear());
             <div class="xp__meta" data-xp-meta={i}>
               <span class="xp__company">{e.company}</span>
               <span class="xp__role muted">{e.role}</span>
-              <span class="xp__dates eyebrow">{e.start} – {e.end}</span>
+              <span class="xp__dates label">{e.start} – {e.end}</span>
             </div>
           ))}
         </div>
@@ -25,11 +25,10 @@ const startYear = String(new Date().getFullYear());
     </div>
 
     <ol class="xp__list">
-      <span class="xp__rule" aria-hidden="true"><span data-xp-fill></span></span>
       {experience.map((e, i) => (
         <li class:list={['xp__card', { 'is-todo': e.todo }]} data-xp-card={i} data-xp-year={e.year} data-reveal>
           <header class="xp__head">
-            <p class="eyebrow">
+            <p class="label">
               {e.start} – {e.end} · {e.location}
             </p>
             <h3 class="xp__title display">
@@ -43,11 +42,6 @@ const startYear = String(new Date().getFullYear());
                 )}
               </span>
             </h3>
-            {e.todo && (
-              <p class="xp__todo">
-                <b>TODO</b> Fill in this role in <code>src/data/experience.ts</code>. It is the newest and the one recruiters will read first.
-              </p>
-            )}
             <p class="muted">{e.summary}</p>
           </header>
 
@@ -61,9 +55,7 @@ const startYear = String(new Date().getFullYear());
             </div>
           )}
 
-          <ul class="tags" aria-label="Technologies">
-            {e.tags.map((t) => <li class="tag">{t}</li>)}
-          </ul>
+          <p class="toolline">{e.tags.join(', ')}</p>
         </li>
       ))}
     </ol>
@@ -122,37 +114,20 @@ const startYear = String(new Date().getFullYear());
     font-weight: 600;
   }
   .xp__list {
-    position: relative;
     display: grid;
-    gap: clamp(2.5rem, 5vw, 4rem);
-    padding-left: clamp(1.25rem, 3vw, 2.5rem);
-  }
-  .xp__rule {
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    bottom: 0.5rem;
-    width: 1px;
-    background: var(--line-strong);
-  }
-  .xp__rule > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--accent);
-    transform-origin: top;
+    gap: clamp(3.5rem, 7vw, 6rem);
   }
   .xp__card {
     display: grid;
     gap: var(--space-5);
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--line);
+    /* no border: cards group by spacing */
     border-radius: var(--radius-lg);
-    background: var(--bg-2);
+    background: var(--bg);
   }
+  /* Unfinished entries stay visibly unfinished, in the palette. */
   .xp__card.is-todo {
-    border-style: dashed;
-    border-color: rgb(242 163 58 / 0.55);
+    outline: 1px dashed var(--accent);
+    outline-offset: var(--space-4);
   }
   .xp__head {
     display: grid;
@@ -163,27 +138,11 @@ const startYear = String(new Date().getFullYear());
     line-height: 1.05;
   }
   .xp__at {
-    color: var(--fg-faint);
+    color: var(--fg-muted);
   }
   .xp__at a {
     color: var(--fg);
     text-decoration-color: var(--accent);
-  }
-  .xp__todo {
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-sm);
-    background: var(--accent-soft);
-    color: var(--fg);
-    font-size: var(--step--1);
-  }
-  .xp__todo b {
-    color: var(--accent);
-    font-family: var(--font-mono);
-    margin-right: 0.5em;
-  }
-  .xp__todo code {
-    font-family: var(--font-mono);
-    font-size: 0.95em;
   }
   .xp__bullets {
     display: grid;

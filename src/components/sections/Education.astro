@@ -3,11 +3,11 @@ import Chapter from '@/components/Chapter.astro';
 import { education } from '@/data/education';
 ---
 
-<Chapter id="education" number="06" eyebrow="School" titleHtml="Two degrees, <em>one thread</em>.">
+<Chapter id="education" title="Two degrees, one thread">
   <div class="edu" data-reveal-group>
     {education.map((e) => (
       <article class="edu__card">
-        <p class="eyebrow">{e.start} – {e.end} · {e.location}</p>
+        <p class="label">{e.start} – {e.end} · {e.location}</p>
         <h3 class="edu__school display">
           <a href={e.href} target="_blank" rel="noopener">{e.school}<span class="visually-hidden"> (opens in new tab)</span></a>
         </h3>
@@ -33,9 +33,9 @@ import { education } from '@/data/education';
     display: grid;
     gap: var(--space-3);
     padding: clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--line);
+    /* no border: cards group by spacing */
     border-radius: var(--radius-lg);
-    background: var(--bg-2);
+    background: var(--bg);
   }
   .edu__school {
     font-size: var(--step-1);

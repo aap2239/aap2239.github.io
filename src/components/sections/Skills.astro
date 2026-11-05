@@ -3,24 +3,20 @@ import Chapter from '@/components/Chapter.astro';
 import { skillStages } from '@/data/skills';
 ---
 
-<Chapter id="skills" number="05" eyebrow="Toolbox" titleHtml="The pipeline I <em>ship</em> with.">
+<Chapter id="skills" title="The pipeline I ship with">
   <p class="skills__intro muted measure" data-reveal>
-    No proficiency bars. These are the tools behind the work above, grouped the way a project actually flows.
-    Anything with a red mark has shipped in something on this page.
+    No proficiency bars. These are the tools behind the work above, grouped the way a project actually
+    flows. The ones in white have shipped in something on this page.
   </p>
 
   <div class="pipe" data-pipe>
-    <span class="pipe__line" aria-hidden="true"><span data-pipe-line></span></span>
     {skillStages.map((stage, i) => (
       <div class="pipe__stage" data-reveal-group>
-        <h3 class="pipe__name display">
-          <span class="pipe__idx" aria-hidden="true">0{i + 1}</span>
-          {stage.name}
-        </h3>
+        <h3 class="pipe__name display">{stage.name}</h3>
         <p class="pipe__blurb muted">{stage.blurb}</p>
-        <ul class="tags" aria-label={`${stage.name} tools`}>
+        <ul class="pipe__skills" aria-label={`${stage.name} tools`}>
           {stage.skills.map((s) => (
-            <li class:list={['tag', { 'tag--used': !!s.usedIn }]}>
+            <li class:list={{ 'is-used': !!s.usedIn }}>
               {s.name}
               {s.usedIn && <span class="visually-hidden"> (used in {s.usedIn})</span>}
             </li>
@@ -48,57 +44,27 @@ import { skillStages } from '@/data/skills';
     gap: var(--space-6);
     padding-top: var(--space-6);
   }
-  .pipe__line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--line-strong);
-  }
-  .pipe__line > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--accent);
-    transform-origin: left;
-  }
   .pipe__stage {
     display: grid;
     gap: var(--space-3);
     align-content: start;
   }
   .pipe__name {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
     font-size: var(--step-1);
-  }
-  .pipe__idx {
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    color: var(--accent);
-    letter-spacing: var(--tracking-mono);
   }
   .pipe__blurb {
     font-size: var(--step--1);
     min-height: 2.6em;
   }
-  .tag--used {
-    color: var(--fg);
-    border-color: var(--line-strong);
-    padding-left: 1.5em;
-    position: relative;
+  .pipe__skills {
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--step--1);
+    color: var(--fg-muted);
   }
-  .tag--used::before {
-    content: '';
-    position: absolute;
-    left: 0.65em;
-    top: 50%;
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    transform: translateY(-50%);
+  /* Tools she has actually shipped with read in full strength; the rest sit back. */
+  .pipe__skills .is-used {
+    color: var(--fg);
   }
   @media (max-width: 1023px) {
     .pipe {
@@ -108,19 +74,7 @@ import { skillStages } from '@/data/skills';
   @media (max-width: 767px) {
     .pipe {
       grid-template-columns: 1fr;
-      padding-top: 0;
-      padding-left: var(--space-6);
       gap: var(--space-7);
-    }
-    .pipe__line {
-      top: 0.5rem;
-      bottom: 0.5rem;
-      right: auto;
-      width: 1px;
-      height: auto;
-    }
-    .pipe__line > span {
-      transform-origin: top;
     }
     .pipe__blurb {
       min-height: 0;

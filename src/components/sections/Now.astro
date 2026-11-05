@@ -17,23 +17,22 @@ const track = [...ticker, ...ticker];
 
   <div class="container">
     <header class="chapter__head" data-reveal>
-      <p class="eyebrow eyebrow--dash"><b>07</b> Off the clock</p>
-      <h2 id="now-title" class="chapter__title">What I’m <em>up to</em> lately.</h2>
+      <h2 id="now-title" class="chapter__title">What I’m up to lately</h2>
     </header>
 
     <div class="now">
       <dl class="now__list" data-reveal-group>
         {now.map((item) => (
           <div class:list={['now__item', { 'is-todo': item.todo }]}>
-            <dt class="eyebrow">{item.label}</dt>
+            <dt class="label">{item.label}</dt>
             <dd>
-              <span class="now__value display">{item.value}</span>
+              <span class="now__value">{item.value}</span>
               {item.detail && <span class="now__detail muted">{item.detail}</span>}
             </dd>
           </div>
         ))}
       </dl>
-      <p class="now__stamp eyebrow" data-reveal data-stamp>Updated {nowUpdated}</p>
+      <p class="now__stamp label" data-reveal data-stamp>Updated {nowUpdated}</p>
     </div>
   </div>
 </section>
@@ -89,7 +88,6 @@ const track = [...ticker, ...ticker];
     display: grid;
     gap: var(--space-2);
     padding-block: var(--space-4);
-    border-top: 1px solid var(--line);
   }
   .now__item dd {
     display: grid;
@@ -97,7 +95,7 @@ const track = [...ticker, ...ticker];
   }
   .now__value {
     font-size: var(--step-1);
-    line-height: 1.05;
+    line-height: 1.25;
   }
   .now__detail {
     font-size: var(--step--1);
@@ -110,7 +108,7 @@ const track = [...ticker, ...ticker];
   .now__stamp {
     justify-self: start;
     padding: 0.6em 0.9em;
-    border: 1px solid var(--accent);
+    /* no border */
     color: var(--accent);
   }
   @media (max-width: 767px) {

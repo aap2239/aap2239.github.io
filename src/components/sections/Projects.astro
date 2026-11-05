@@ -4,7 +4,7 @@ import ProjectCard from '@/components/ProjectCard.astro';
 import { featuredProjects, openSourceProjects } from '@/data/projects';
 ---
 
-<Chapter id="work" number="04" eyebrow="Selected work" titleHtml="Things I’ve <em>built</em>, and what they did.">
+<Chapter id="work" title="Things I built, and what they did">
   <div class="featured" data-reveal-group>
     {featuredProjects.map((p) => <ProjectCard project={p} />)}
   </div>
@@ -44,10 +44,8 @@ import { featuredProjects, openSourceProjects } from '@/data/projects';
     font-size: var(--step-1);
   }
   .oss__all {
-    font-family: var(--font-mono);
     font-size: var(--step--1);
     letter-spacing: 0.06em;
-    text-transform: uppercase;
     color: var(--fg-muted);
     text-decoration: none;
   }

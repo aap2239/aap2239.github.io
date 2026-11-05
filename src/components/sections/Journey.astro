@@ -7,8 +7,7 @@ import { journey } from '@/data/journey';
   <div class="journey__stage" data-journey-stage>
     <div class="container journey__inner">
       <header class="chapter__head journey__head" data-reveal>
-        <p class="eyebrow eyebrow--dash"><b>02</b> Route</p>
-        <h2 id="journey-title" class="chapter__title">Four cities, <em>one direction</em>.</h2>
+        <h2 id="journey-title" class="chapter__title">Four cities, one direction</h2>
       </header>
 
       <div class="journey__map">
@@ -19,8 +18,8 @@ import { journey } from '@/data/journey';
         <span class="journey__line" aria-hidden="true"><span data-journey-line></span></span>
         {journey.map((s, i) => (
           <li class:list={['journey__cap', { 'is-todo': s.todo }]} data-cap={i}>
-            <p class="eyebrow journey__cap-meta">
-              <b>0{i + 1}</b> {s.city}, {s.country} · {s.years}
+            <p class="journey__cap-meta label">
+              {s.city}, {s.country} · {s.years}
             </p>
             <h3 class="journey__cap-title display">{s.title}</h3>
             <p class="journey__cap-blurb muted">{s.blurb}</p>
@@ -121,7 +120,7 @@ import { journey } from '@/data/journey';
       top: 0.5rem;
       bottom: 0.5rem;
       width: 2px;
-      background: var(--line-strong);
+      background: var(--line);
     }
     .journey__line > span {
       display: block;

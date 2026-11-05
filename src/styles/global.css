@@ -59,7 +59,6 @@ h3,
 h4 {
   font-weight: 400;
   line-height: 1.1;
-  letter-spacing: -0.01em;
   text-wrap: balance;
   overflow-wrap: anywhere;
 }
@@ -98,26 +97,11 @@ main {
   letter-spacing: var(--tracking-display);
   text-transform: uppercase;
 }
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75em;
-  font-family: var(--font-mono);
+/* A plain small label. No mono, no caps, no accent dash: it sits under a value,
+   it is not a decorative header of its own. */
+.label {
   font-size: var(--step--1);
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
   color: var(--fg-muted);
-}
-.eyebrow b {
-  color: var(--accent);
-  font-weight: 700;
-}
-.eyebrow--dash::before {
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: var(--accent);
-  flex: none;
 }
 .muted {
   color: var(--fg-muted);
@@ -204,9 +188,6 @@ main {
   position: relative;
   padding-block: var(--section-pad);
 }
-.chapter + .chapter {
-  border-top: 1px solid var(--line);
-}
 .chapter__head {
   display: grid;
   gap: var(--space-5);
@@ -216,32 +197,14 @@ main {
   font-family: var(--font-display);
   font-size: var(--step-3);
   line-height: 0.95;
-  letter-spacing: var(--tracking-display);
   text-transform: uppercase;
   max-width: 18ch;
 }
-.chapter__title em,
-.display em {
-  font-style: normal;
-  color: var(--accent);
-}
 
-/* ---------- Chips ---------- */
-.tag {
-  display: inline-block;
-  padding: 0.35em 0.7em;
-  border: 1px solid var(--line-strong);
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+/* Technologies read as a plain line of text, not a row of chips. */
+.toolline {
   color: var(--fg-muted);
-  white-space: nowrap;
-}
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  font-size: var(--step--1);
 }
 
 /* ---------- Reveal pre-hide (only when JS is on and motion is allowed) ---------- */

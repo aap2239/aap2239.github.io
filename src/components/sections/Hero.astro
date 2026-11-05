@@ -8,8 +8,6 @@ const { hero } = site;
 <section id="top" class="hero" aria-label="Introduction">
   <div class="container hero__inner" data-hero>
     <div class="hero__text">
-      <p class="eyebrow eyebrow--dash hero__eyebrow" data-intro>{hero.eyebrow}</p>
-
       <h1 class="hero__title display">
         {hero.lines.map((line, i) => (
           <span class="mask-line">
@@ -28,7 +26,7 @@ const { hero } = site;
         <a class="btn" href="#contact">Say hello</a>
       </div>
 
-      <p class="hero__status eyebrow" data-intro>
+      <p class="hero__status label" data-intro>
         <span class="hero__dot" aria-hidden="true"></span>{hero.status}
       </p>
     </div>
@@ -99,6 +97,9 @@ const { hero } = site;
   }
   .mask-line > span {
     display: block;
+    /* Each line is authored as one line; without negative tracking the longest
+       of them is wide enough that the reset's overflow-wrap would break it. */
+    white-space: nowrap;
     will-change: transform;
   }
   .hero__accent {
@@ -134,7 +135,7 @@ const { hero } = site;
   .hero__portrait {
     position: relative;
     overflow: hidden;
-    background: var(--bg-3);
+    background: var(--bg);
   }
   .hero__portrait :global(img) {
     width: 100%;
@@ -153,12 +154,9 @@ const { hero } = site;
     background-size: 100% 100%, 5px 5px;
   }
   .hero__strip {
-    border-top: 1px solid var(--line);
     padding-block: var(--space-4);
-    font-family: var(--font-mono);
     font-size: var(--step--1);
-    letter-spacing: var(--tracking-mono);
-    text-transform: uppercase;
+    
     color: var(--fg);
     overflow: hidden;
   }

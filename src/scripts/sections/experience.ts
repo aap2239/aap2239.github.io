@@ -5,24 +5,10 @@ interface Opts {
   desktop: boolean;
 }
 
-/** Fill the vertical rule on scroll; on desktop keep the sticky column in sync with the card in view. */
+/** On desktop, keep the sticky year column in sync with the card in view. */
 export function initExperience({ desktop }: Opts): void {
   const root = document.querySelector<HTMLElement>('[data-xp]');
   if (!root) return;
-
-  const fill = root.querySelector<HTMLElement>('[data-xp-fill]');
-  if (fill) {
-    gsap.fromTo(
-      fill,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: 'none',
-        transformOrigin: 'top',
-        scrollTrigger: { trigger: root, start: 'top 60%', end: 'bottom 60%', scrub: true },
-      },
-    );
-  }
 
   if (!desktop) return;
 

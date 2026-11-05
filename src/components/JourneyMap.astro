@@ -133,7 +133,7 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
     aspect-ratio: 2.1 / 1;
     display: block;
     background: var(--bg);
-    border: 1px solid var(--line);
+
   }
   .map__ocean {
     fill: var(--bg);
@@ -152,7 +152,7 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
      (non-scaling-stroke would break dash-based drawing under a moving viewBox). */
   .map__ghost {
     fill: none;
-    stroke: var(--fg-faint);
+    stroke: var(--fg-muted);
     stroke-width: 3;
     stroke-dasharray: 4 12;
     stroke-linecap: round;
@@ -166,7 +166,7 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
     stroke-linejoin: round;
   }
   .map__ring {
-    fill: var(--accent-soft);
+    fill: transparent;
     stroke: var(--accent);
     stroke-width: 1.5;
     vector-effect: non-scaling-stroke;
@@ -178,8 +178,6 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
     fill: var(--fg);
     font-family: var(--font-display);
     font-size: 22px;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
     paint-order: stroke;
     stroke: var(--bg);
     stroke-width: 6px;
@@ -187,7 +185,6 @@ const defaultView = `0 ${(MAP_H - MAP_W / ASPECT) / 2} ${MAP_W} ${MAP_W / ASPECT
   }
   .map__years {
     fill: var(--fg-muted);
-    font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.08em;
     paint-order: stroke;
